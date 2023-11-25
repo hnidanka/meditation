@@ -28,6 +28,7 @@ app.use('/api/mood' , moodRoute)
 app.use('/api/programs',programRoute)
 app.use('/api/conversations', conversationRoute)
 app.use('/api/message', messageRoute)
+app.use('/api/chat', chatRoute)
  async function start(){
     try {
         await mongoose.connect('mongodb+srv://test:test123@cluster0.chbpm7k.mongodb.net/')
