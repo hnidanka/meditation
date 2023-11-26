@@ -3,14 +3,15 @@ import {useState , useEffect} from 'react'
 import axios from '../../utils/axios';
 
 export default function Conversetion({conversation , currentUser}){
+    
     const [user,setUser] = useState(null)
 
     useEffect(()=>{
-        const friendId = conversation.members.find(m=> m !== currentUser._id )
+        //const friendId = conversation.members.find(m=> m !== currentUser._id )
 
         const getUser = async ()=>{
             try{
-            const res = await axios(`/users?userId=${friendId}`)
+            const res = await axios(`/users`)
             setUser(res.data)
             console.log(res)
         }catch(err){
@@ -23,7 +24,12 @@ export default function Conversetion({conversation , currentUser}){
     
     return(
         <div className={styles.conversation}>
-             <span className={styles.conversationName}>{user && user.username}</span>
+            <img
+              className="chatOnlineImg"
+              src='https://www.jtrholidays.com/static/img/bucket/Tours/UAE/Dubai/Theme-Park/IMG-World-of-Adventure/IMG-World-of-Adventure-03.jpg'
+              alt=""
+            />
+             <span className={styles.conversationName}>User:{user?.username}</span>
         </div>
     )
 }

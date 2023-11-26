@@ -3,8 +3,6 @@ import styles from './styles.module.css';
 import Search from './images/Search.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMessage, setMessages, fetchUsers } from '../../redux/features/chatSlice';
-import { useNavigate } from 'react-router-dom';
-
 
 function Chat() {
   const dispatch = useDispatch();
@@ -17,8 +15,6 @@ function Chat() {
   const storedUsers = localStorage.getItem('selectedUsers');
   return storedUsers ? JSON.parse(storedUsers) : [];
 });
-const [activeChatUser, setActiveChatUser] = useState(null);
-const navigate = useNavigate();
 
 useEffect(() => {
   // Save selectedUsers to local storage whenever it changes
@@ -41,13 +37,7 @@ useEffect(() => {
     const updatedUsers = selectedUsers.filter(user => user._id !== userToRemove._id);
     setSelectedUsers(updatedUsers);
   }; 
-  const openChatWithUser = (user) => {
-    setActiveChatUser(user);
-    // You may want to dispatch an action to fetch messages between logged-in user and selected user here
-  };
-  const navigateToChatPage = (userId) => {
-    navigate(`/individual/${userId}`); // Navigate to individual chat page
-  };
+
   useEffect(() => {
     dispatch(fetchUsers()); // Dispatch the fetchUsers action on component mount
   }, [dispatch]);
@@ -82,28 +72,14 @@ useEffect(() => {
           </div>
         )}
       </div>
-      {selectedUsers.length > 0 ? (
-        selectedUsers.map((selectedUser) => (
-          <div
-          key={selectedUser._id}
-          className={styles.chatWindow}
-          style={{ backgroundColor: 'purple' }}
-          onClick={() => navigateToChatPage(selectedUser._id)} // Navigate to individual chat page on click
-        >
-            <p>{selectedUser.username}</p>
-            <button onClick={() => removeChat(selectedUser)}>Close Chat</button>
-            {/* Render chat messages or input field here */}
-          </div>
-        ))
-      ) : (
-        <div className={styles.noneSMS}>Brak powiadomień</div>
-      )}
-      {activeChatUser && (
-        <div className={styles.chatWindow} style={{ backgroundColor: 'purple' }}>
-          <p>Chatting with: {activeChatUser.username}</p>
+      {selectedUsers.map((selectedUser) => (
+        <div key={selectedUser._id} className={styles.chatWindow} style={{ backgroundColor: 'purple' }}>
+          <p>{selectedUser.username}</p>
+          <button onClick={() => removeChat(selectedUser)}>Close Chat</button>
           {/* Render chat messages or input field here */}
         </div>
-      )}
+      ))}
+      <div className={styles.noneSMS}>Brak powiadomień</div>
     </div>
   );
 }

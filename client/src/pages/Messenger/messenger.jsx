@@ -13,6 +13,11 @@ export default function Messenger(){
   const userId = useSelector(state => state.auth.user?._id)
   
   const [conversations , setConversations] = useState([])
+  const [currentChat , setCurrentChat] = useState(null)
+  const [messages , setMessages] = useState([])
+  const [searchQuery, setSearchQuery] = useState('');
+
+  
 
   useEffect(() =>{
      const getConversations = async ()=>{
@@ -28,6 +33,18 @@ export default function Messenger(){
     getConversations();
   }, [userId])
   
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get("/messages/" + currentChat?._id);
+        setMessages(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMessages();
+  }, [currentChat]);
+
     return(
         <>
         <Navbar />
@@ -36,7 +53,9 @@ export default function Messenger(){
                    <div className={styles.chatMenuWrapper}>
                    <input placeholder="Search for friends" className={styles.chatMenuInput} />
                    {conversations.map(c=>(
+                    <div onClick={()=>setCurrentChat(c)}>
                         <Conversetion  conversation={c} currentUser={user}/>
+                    </div>
                    ))}
 
                    
@@ -44,10 +63,15 @@ export default function Messenger(){
                </div>
                <div className={styles.chatBox}>
                  <div className={styles.chatBoxWrapper}>
+
+                {
+                  currentChat ?
+                  <>
                     <div className={styles.chatBoxTop}>
+                     
+                       
                        <Message />
-                       <Message own={true}/>
-                       <Message />
+                       
                      </div>
                      <div className={styles.chatBoxBottom}>
                      <textarea
@@ -57,7 +81,7 @@ export default function Messenger(){
                       <button className={styles.chatSubmitButton} >
                     Send
                   </button>
-                     </div>
+                     </div> </> : <span className={styles.noConversationText}>Open a conversation to start a chat.</span>}
                   </div>
                </div>
                <div className={styles.chatOnline}>
