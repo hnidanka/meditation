@@ -33,7 +33,10 @@ const UserSchema = new mongoose.Schema({
       type: Number,
       default: 0, 
     },
-    
+    finishedDifferentMeditations: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Meditation'
+    }],
   });
 
 export default mongoose.model('User', UserSchema)  

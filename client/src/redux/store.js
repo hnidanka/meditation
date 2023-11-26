@@ -6,6 +6,7 @@ import meditationSlice from './features/meditationSlice'
 import moodSlice from './features/moodSlice'
 import programSlice from './features/programSlice'
 import chatSlice from './features/chatSlice';
+import rewardSlice from './features/rewardSlice'
 // const rootReducer = combineReducers({
 //     questions: questionReducer
 // })
@@ -18,7 +19,8 @@ export const store = configureStore ({
         meditation: meditationSlice,
         mood: moodSlice,
         program5Day: programSlice,
-        chat: chatSlice
+        chat: chatSlice,
+        reward:rewardSlice
     },
 })
 //export default configureStore({reducer: rootReducer});

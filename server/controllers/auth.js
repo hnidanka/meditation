@@ -121,6 +121,7 @@ export const getMe =async (req, res) =>{
         )
     }
 }
+//add finishedMeditation
 export const finishMeditation = async (req, res) => {
     try {
       const userId = req.params.userId;
@@ -138,15 +139,15 @@ export const finishMeditation = async (req, res) => {
       res.status(500).json({ error: 'Error finishing meditation' });
     }
   };
+  //upgrateLevel
   export const upgrateLevel = async (req, res) => {
     try {
       const userId = req.params.userId;
   
-      // Update the user's finishedMeditations field (you may want to increment it by 1)
       const user = await User.findByIdAndUpdate(
         userId,
-        { $inc: { level: 1 } }, // or use $set if you want to set a specific value
-        { new: true } // return the updated document
+        { $inc: { level: 1 } }, 
+        { new: true } 
       );
   console.log(user.level)
       res.json(user);

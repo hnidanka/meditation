@@ -122,6 +122,7 @@ if(finishedMeditations === 2 && level === 1 || finishedMeditations === 5 && leve
    } else {
   //   console.log(`Twój poziom jest taki sam jak wcześniej: ${userr?.level}`);
    }
+   
 }, [userr?.finishedMeditations, dispatch]);
 
 

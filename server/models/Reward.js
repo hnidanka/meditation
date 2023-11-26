@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 const RewardSchema = new mongoose.Schema({
-    name: String,
+  title: String,
     description: String,
-    pointsRequired: Number,
+    img: String,
   });
 
   export default mongoose.model('Reward', RewardSchema) 

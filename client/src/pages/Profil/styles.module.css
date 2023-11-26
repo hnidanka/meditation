@@ -46,8 +46,8 @@
   }
 .blockAwards{
     position: relative;
-    width: 250px;
-    height: 250px; 
+    width: 450px;
+    height: auto; 
     margin-top: 20px;
     background-color: #6225A0; 
     border-radius: 20px; 
