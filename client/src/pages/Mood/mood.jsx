@@ -10,7 +10,7 @@ import bad from './images/bad.png';
 import Chart from 'chart.js/auto';
 import { addMoodRecord, getMoodData } from '../../redux/features/moodSlice';
 import { Line } from 'react-chartjs-2';
-
+import { getRewards ,  addUserRewards} from '../../redux/features/rewardSlice';
 function MoodCalendar() {
   const userId = useSelector((state) => state.auth.user?._id);
   const state = useSelector((state) => state);
@@ -19,7 +19,8 @@ function MoodCalendar() {
   const [selectedMood, setSelectedMood] = useState('');
   const [chartData, setChartData] = useState(null);
   const chartRef = useRef(null);
-
+  const [selectedRewardId, setSelectedRewardId] = useState('')
+  const [localMoodData, setLocalMoodData] = useState([]);
   const dispatch = useDispatch();
   const moodData = useSelector((state) => state.mood.moodData);
 
@@ -36,23 +37,50 @@ function MoodCalendar() {
   };
 
   const handleMoodSelection = async (mood) => {
-    dispatch(addMoodRecord({ userId, date: selectedDate, mood }));
+    await dispatch(addMoodRecord({ userId, date: selectedDate, mood }));
+    await dispatch(getMoodData(userId));
+    setLocalMoodData((prevData) => [...prevData, { userId, date: selectedDate, mood }]);
     closeModal();
   };
+  
 
   useEffect(() => {
     if (userId) {
       dispatch(getMoodData(userId));
     }
+    dispatch(getRewards());
   }, [dispatch, userId]);
- 
- 
+  
+  useEffect(() => {
+    setLocalMoodData(Object.values(moodData)); // Update local state when moodData changes
+  }, [moodData]);
 
+  useEffect(() => {
+    if (moodData.length > 0 && state.reward.rewards.length > 0) {
+      const goodMoodData = moodData.filter(entry => entry.mood === 'good');
+  
+      if (goodMoodData.length >= 5) {
+        const rewardIdToAdd = state.reward.rewards[4]?._id;
+        setSelectedRewardId(rewardIdToAdd);
+        console.log(selectedRewardId);
+      }
+    }
+  }, [moodData, state.reward.rewards, userId]);
+  useEffect(() => {
+    console.log(selectedRewardId);
+  
+    if (selectedRewardId) {
+      dispatch(getMoodData(userId));
+      dispatch(addUserRewards({ userId, selectedRewardId })).then(() => {
+        dispatch(getMoodData(userId));
+      });
+    }
+  }, [dispatch , selectedRewardId ]);
  const prepareChartData = () => {
-    const moodEntries = Object.values(moodData);
+    const moodEntries = Object.values(localMoodData);
     const labels = moodEntries.map(entry => new Date(entry.date).toLocaleDateString());
     const moodValues = moodEntries.map(entry => entry.mood === 'good' ? 1 : 0); // Assign numeric values for mood
-
+console.log(state)
     return {
       labels,
       datasets: [
@@ -68,15 +96,10 @@ function MoodCalendar() {
   };
   
   const tileContent = ({ date, view }) => {
-    if (view === 'month' ) {
+    if (view === 'month') {
       const dateString = date.toISOString();
-      
-      // Convert moodData to an array
-      const moodDataArray = Object.values(moodData) || [];
-      
-      // Use find on the array
-      const moodEntry = moodDataArray.find(entry => entry && entry.date === dateString);
-
+      const moodEntry = localMoodData.find((entry) => entry && entry.date === dateString);
+  
       if (moodEntry) {
         const mood = moodEntry.mood;
         const isUserEntry = moodEntry.userId === userId;
@@ -85,13 +108,11 @@ function MoodCalendar() {
           return (
             <div style={{ color: 'green', fontWeight: 'bold' }}>
               good😄
-              
             </div>
           );
         } else if (mood === 'bad' && isUserEntry) {
           return (
             <div style={{ color: 'red', fontWeight: 'bold' }}>
-              
               bad😞
             </div>
           );

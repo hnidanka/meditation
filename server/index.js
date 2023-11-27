@@ -11,7 +11,7 @@ import chatRoute from './routes/chat.js'
 import conversationRoute from './routes/conversations.js'
 import messageRoute from './routes/message.js'
 
-import usersRoute from './routes/user'
+import usersRoute from './routes/user.js'
 
 import RewardRoute from './routes/reward.js'
 

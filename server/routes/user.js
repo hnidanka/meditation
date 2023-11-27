@@ -1,5 +1,8 @@
-const User = require('../models/User')
-const router = require("express").Router();
+
+import { Router } from 'express'
+import  User from '../models/User.js'
+
+const router = new Router()
 
 //get a user
 router.get("/", async (req, res) => {
@@ -14,3 +17,4 @@ router.get("/", async (req, res) => {
       res.status(500).json(err);
     }
   });
+  export default router
