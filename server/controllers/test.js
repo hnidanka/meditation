@@ -36,11 +36,7 @@ export async function storeResult(req, res) {
     if (!user) {
       throw new Error('User not found');
     }
-
-    // const { result } = req.body.result;
-    // user.result.push(result);
-    // await user.save();
-     const { userId, result} = req.body;
+     const result = req.body;
      const newResult = new Result({
       username: user.username,
       result,
@@ -52,7 +48,7 @@ export async function storeResult(req, res) {
     console.log('Result Saved Successfully...!');
     res.json({ msg: 'Result Saved Successfully...!' });
   } catch (error) {
-    console.error('Error:', error); // Log the error to the console
+    console.error('Error:', error); 
     res.json({ error: error.message });
   }
 }

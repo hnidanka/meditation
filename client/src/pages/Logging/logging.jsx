@@ -20,7 +20,7 @@ const state = useSelector((state)=> state)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
-        //if (status) toast(status)
+      if (status) toast(status)
         
        if (isAuth) {
         if (isResult && user.result.length > 0) {

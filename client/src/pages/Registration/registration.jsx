@@ -7,14 +7,20 @@ import twitter from './images/twitter.png';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser, checkIsAuth } from '../../redux/features/auth/authSlice'
-
+import { toast } from 'react-toastify'
 function Registration() {
   const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
+    const { status } = useSelector((state) => state.auth)
 
     const dispatch = useDispatch()
-
+    useEffect(() => {
+      if (status) {
+          toast(status)
+      }
+     
+  }, [status])
     const handleSubmit = () => {
       try {
           dispatch(registerUser({ email, password,username }))
@@ -25,7 +31,7 @@ function Registration() {
           console.log(error)
       }
   }
-
+  console.log(status)
     return (
       <div className={styles.bodyBlock}>
         <div className={styles.oval}></div>
@@ -52,7 +58,7 @@ function Registration() {
           </p>
           </div>
            <div className={styles.contentDown}>
-          <Link to="/logging" className={styles.nextButton} onClick={handleSubmit}>Dalej</Link>
+          <p className={styles.nextButton} onClick={handleSubmit}>Dalej</p>
   
           <div className={styles.lines}>
                  <div className={styles.line}></div>
