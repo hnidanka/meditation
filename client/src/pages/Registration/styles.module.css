@@ -157,3 +157,15 @@
   .contentDown{
     margin-top: 50px;
   }
+  .errorMessage {
+    color: red; /* lub inny kolor, który oznacza błąd */
+    font-size: 14px; /* lub inny rozmiar czcionki */
+    margin-top: 5px; /* opcjonalne, aby dodać odstęp od pola */
+  }
+  
+  .passwordStrength {
+    color: green; /* lub inny kolor, który oznacza siłę hasła */
+    font-size: 14px; /* lub inny rozmiar czcionki */
+    margin-top: 5px; /* opcjonalne, aby dodać odstęp od pola */
+  }
+  
