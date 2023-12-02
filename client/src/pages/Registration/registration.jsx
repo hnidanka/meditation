@@ -7,44 +7,23 @@ import twitter from './images/twitter.png';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser, checkIsAuth } from '../../redux/features/auth/authSlice'
-
+import { toast } from 'react-toastify'
 function Registration() {
   const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
-    const [errorMessage, setErrorMessage] = useState('');
-    const [passwordStrength, setPasswordStrength] = useState('');
+
+    const { status } = useSelector((state) => state.auth)
 
     const dispatch = useDispatch()
+    useEffect(() => {
+      if (status) {
+          toast(status)
+      }
+     
+  }, [status])
+    const handleSubmit = () => {
 
-    const isStrongPassword = (password) => {
-      const hasUpperCase = /[A-Z]/.test(password);
-      const hasNumber = /\d/.test(password);
-      const isLengthValid = password.length >= 8;
-      
-      if (isLengthValid && hasUpperCase && hasNumber) {
-        setPasswordStrength('Silne hasło');
-      } else if (isLengthValid || hasUpperCase || hasNumber) {
-        setPasswordStrength('Średnie hasło');
-      } else {
-        setPasswordStrength('Słabe hasło');
-      }   
-      return isLengthValid && hasUpperCase && hasNumber;
-    };
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-
-    if (!email || !password || !username) {
-      setErrorMessage('Wszystkie pola są wymagane!');
-      return;
-    }
-    const isPasswordStrong = isStrongPassword(password);
-
-    if (!isPasswordStrong) {
-      setErrorMessage('Hasło jest zbyt słabe. Spróbuj użyć silniejszego hasła.');
-      return;
-    }
       try {
           dispatch(registerUser({ email, password,username }))
           setEmail('')
@@ -52,10 +31,10 @@ function Registration() {
           setUsername('')
       } catch (error) {
           console.log(error)
-          setErrorMessage('Wystąpił błąd podczas rejestracji.');
+          
       }
   }
-
+  console.log(status)
     return (
       <div className={styles.bodyBlock}>
         <div className={styles.oval}></div>
@@ -82,7 +61,7 @@ function Registration() {
           </p>
           </div>
            <div className={styles.contentDown}>
-          <Link to="/logging" className={styles.nextButton} onClick={handleSubmit}>Dalej</Link>
+          <p className={styles.nextButton} onClick={handleSubmit}>Dalej</p>
   
           <div className={styles.lines}>
                  <div className={styles.line}></div>

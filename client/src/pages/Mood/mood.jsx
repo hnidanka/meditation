@@ -79,8 +79,7 @@ function MoodCalendar() {
  const prepareChartData = () => {
     const moodEntries = Object.values(localMoodData);
     const labels = moodEntries.map(entry => new Date(entry.date).toLocaleDateString());
-    const moodValues = moodEntries.map(entry => entry.mood === 'good' ? 1 : 0); // Assign numeric values for mood
-console.log(state)
+    const moodValues = moodEntries.map(entry => entry.mood === 'good' ? 1 : 0); 
     return {
       labels,
       datasets: [
@@ -99,11 +98,9 @@ console.log(state)
     if (view === 'month') {
       const dateString = date.toISOString();
       const moodEntry = localMoodData.find((entry) => entry && entry.date === dateString);
-  
       if (moodEntry) {
         const mood = moodEntry.mood;
         const isUserEntry = moodEntry.userId === userId;
-  
         if (mood === 'good' && isUserEntry) {
           return (
             <div style={{ color: 'green', fontWeight: 'bold' }}>
