@@ -37,6 +37,10 @@ const UserSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Meditation'
     }],
+    finishedProgramDays: [{
+      type: String,
+      default: null,
+    }]
   });
 
 export default mongoose.model('User', UserSchema)  

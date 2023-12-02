@@ -105,6 +105,20 @@ export const registerUser = createAsyncThunk(
     }
   );
 
+  export const finisheProgramDay = createAsyncThunk(
+    'meditations/updateFinishedDifferentMeditations',
+    async ({userId, dayName}) => {
+      try {
+        const { data } = await axios.put(`/auth/finisheProgramDay`, {userId, dayName});
+        return data;
+      } catch (error) {
+        console.error('Error updateFinishedDifferentMeditations:', error);
+        throw error;
+      }
+    }
+  );
+
+  
   
 export const authSlice = createSlice({
     name: 'auth',
@@ -194,6 +208,8 @@ export const authSlice = createSlice({
             state.isLoading = false
         },
         
+
+
          //upgrateLevel
          [upgrateLevel.pending]: (state) => {
             state.isLoading = true
@@ -221,6 +237,21 @@ export const authSlice = createSlice({
             
         },
         [addUserImage.rejectWithValue]: (state, action) => {
+            state.status = action.payload.message
+            state.isLoading = false
+        },
+         //finisheProgramDay
+         [finisheProgramDay.pending]: (state) => {
+            state.isLoading = true
+            state.status = null
+        },
+        [finisheProgramDay.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.status = null
+            state.user = action.payload
+            
+        },
+        [finisheProgramDay.rejectWithValue]: (state, action) => {
             state.status = action.payload.message
             state.isLoading = false
         },

@@ -229,7 +229,7 @@ console.log(`AUDIO ${audio}`)
           )}
         </div>
 
-        <audio ref={audioRef} src={meditationOne.audio.src} />
+        <audio ref={audioRef} src={meditationOne?.audio.src} />
       </div>
     </div>
   );

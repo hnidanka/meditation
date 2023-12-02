@@ -45,6 +45,52 @@
     margin-left: 20px;
     font-size: 25px;
   }
-
+.lockUnlock{
+  margin-left: 320px;
+}
   
+.customModal {
+   /* Set the desired width */
+  
+  max-width: 80%; /* Ensure it's responsive and doesn't exceed 80% of the screen width */
+  height: 80%; /* Set the desired height */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fcfcfc;
+  border-radius: 80px;
+  border:white;
+  padding: 30px;
+  
+}
+
+
+
+.buttonStart{
+  border-radius: 80px;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  position: absolute;
+  top: 80%; /* Adjust the top value to your desired position */
+  right: 50%;
+  background-color: #471E70;
+  color: white;
+}
+.buttonBack{
+  border-radius: 80px;
+  padding: 10px;
+  border: none;
+}
+.imageButton{
+  background: none; /* Remove the background */
+  border: none; /* Remove the border */
+  padding: 0; /* Remove any padding */
+  cursor: pointer;
+  position: absolute;
+  top: 20px; /* Adjust the top value to your desired position */
+  right: 30px
+}
+
   
