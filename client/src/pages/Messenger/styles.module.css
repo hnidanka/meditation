@@ -1,7 +1,6 @@
 .messenger {
     height: calc(100vh - 70px);
     display: flex;
-    background-color: aquamarine;
   }
   
   .chatMenu {
@@ -24,6 +23,8 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    width: 30%;
+    margin: 0 auto;
   }
   
   .chatBoxTop {

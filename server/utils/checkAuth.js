@@ -11,11 +11,13 @@ export const checkAuth = (req, res, next) => {
 
             next()
         } catch (error) {
+            console.log(error.message);
             return res.json({
                 message: 'Nie na dostępu.',
             })
         }
     } else {
+        console.log("no token provided");
         return res.json({
             message: 'Nie na dostępu.',
         })

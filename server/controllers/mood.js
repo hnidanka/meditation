@@ -25,8 +25,10 @@ import User from "../models/User.js";
 
 export const addMoodRecord = async (req, res) => {
   try {
+    
     const {userId, date, mood} = req.body
     const user = await User.findById(userId);
+    //const moodModel = await Mood.findById(req.body.userId);
     if (!user) {
       throw new Error('User not found. Meditation not saved.');
   } 

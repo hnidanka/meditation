@@ -1,31 +1,13 @@
 import { Router } from 'express'
 import Message from '../models/Message.js'
+import { fetchMessages, sendMessage } from '../controllers/message.js';
+import { checkAuth } from '../utils/checkAuth.js';
 const router = new Router()
 
-//add
+router.post("/send-message/:chatId", checkAuth, sendMessage);
 
-router.post("/addMessage", async (req, res) => {
-    const newMessage = new Message(req.body);
-  
-    try {
-      const savedMessage = await newMessage.save();
-      res.status(200).json(savedMessage);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-
-  router.get("/:conversationId", async (req, res) => {
-    try {
-      const messages = await Message.find({
-        conversationId: req.params.conversationId,
-      });
-      res.status(200).json(messages);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+router.get("/:chatId", checkAuth, fetchMessages);
 
 
 
-  export default router
+export default router

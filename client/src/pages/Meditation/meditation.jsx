@@ -11,7 +11,7 @@ import M2 from './audio/M2.MP3';
 import M3 from './audio/M3.MP3';
 import M4 from './audio/M4.MP3';
 import M5 from './audio/M5.MP3';
-import { updateFinishedMeditations , finishedDifferentMeditations} from '../../redux/features/auth/authSlice';
+import { updateFinishedMeditations , upgrateLevel} from '../../redux/features/auth/authSlice';
 
 const songsData = [
   {
@@ -19,15 +19,6 @@ const songsData = [
   },
   {
     audio: new Audio(M2),
-  },
-  {
-    audio: new Audio(M3),
-  },
-  {
-    audio: new Audio(M4),
-  },
-  {
-    audio: new Audio(M5),
   },
   {
     audio: new Audio(M3),
@@ -190,8 +181,7 @@ console.log(`AUDIO ${audio}`)
   const handleFinish = () => {
     setIsFinished(true);
     dispatch(updateFinishedMeditations(userId));
-    console.log(`MeditationId: ${meditationId}`)
-    dispatch(finishedDifferentMeditations({userId, meditationId}))
+    
     console.log(user.finishedMeditations)
     navigate('/meditationsList');
   };
