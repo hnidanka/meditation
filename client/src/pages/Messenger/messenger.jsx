@@ -62,6 +62,7 @@ export default function Messenger()
     setMessageText("");
   }
   return (
+    <div className={styles.bodyBlock}>
     <>
       <Navbar />
       <div className={styles.messenger}>
@@ -77,7 +78,7 @@ export default function Messenger()
             <div className={styles.chatBoxBottom}>
               <textarea
                 className={styles.chatMessageInput}
-                placeholder="write something..."
+                placeholder="Napisz coś..."
                 value={messageText}
                 onChange={(event) => { setMessageText(event.target.value) }}
               ></textarea>
@@ -87,6 +88,6 @@ export default function Messenger()
             </div>
           </div>
         </div>
-      </div></>
+      </div></></div>
   )
 }

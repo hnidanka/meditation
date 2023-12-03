@@ -42,7 +42,7 @@ async function start()
 {
     try
     {
-        await mongoose.connect('mongodb+srv://test:test123@cluster0.chbpm7k.mongodb.net/meditationDB')
+        await mongoose.connect('mongodb+srv://test:test123@cluster0.chbpm7k.mongodb.net/test')
         server.listen(3002, () => console.log(`Server działa na porcie: 3002`))
 
     } catch (error)

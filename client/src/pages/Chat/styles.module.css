@@ -85,7 +85,6 @@
 .searchResults{
  
   width: 700px; /* Розмір контейнера, змініть на потрібний */
-  
   border-top: none;
   border-radius: 0 0 5px 5px;
 }
@@ -104,22 +103,24 @@
   cursor: pointer;
 }
 .chatsContainer {
-  width: 500px;
-  padding: 10px;
+  width: 700px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  margin-right: 50px;
+
 }
 .signleChatContainer {
-  background-color: white;
+  background-color: #471E70;
   user-select: none;
-  border: 1px solid #ccc; 
-  border-radius: 5px; 
-  padding: 10px;
+  border-radius: 15px; 
+  padding: 25px;
   width: 100%;
   margin-bottom: 10px; 
   cursor: pointer; 
   transition: background-color 0.3s ease; 
+  color: white;
 }
 
 .signleChatContainer:hover {
