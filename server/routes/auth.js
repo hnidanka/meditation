@@ -1,5 +1,5 @@
  import { Router } from 'express'
-import { register, login, getMe , finishMeditation,upgrateLevel, addUserImage, finishedDifferentMeditations} from '../controllers/auth.js'
+import { register, login, getMe , finishMeditation,upgrateLevel, addUserImage, finishedDifferentMeditations,finisheProgramDay} from '../controllers/auth.js'
 import { checkAuth } from '../utils/checkAuth.js'
 
 const router = new Router()
@@ -19,4 +19,5 @@ router.patch('/:userId/finishMeditation', finishMeditation);
 router.put('/finishDifferentMeditations/:userId', finishedDifferentMeditations);
 router.patch('/:userId/upgrateLevel', upgrateLevel);
 router.put('/addUserImage', addUserImage);
+router.put('/finisheProgramDay', finisheProgramDay);
  export default router

@@ -6,6 +6,7 @@ const programSchema = new mongoose.Schema({
     {
       dayId: Number,
       dayName: String,
+      dayMeditation: { type: mongoose.Schema.Types.ObjectId, ref: 'Meditation' },
     },
   ],
 });

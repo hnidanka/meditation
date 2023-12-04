@@ -207,3 +207,33 @@ export const finishedDifferentMeditations = async (req, res) => {
       res.status(500).json({ error: 'Error addUserImage:' });
     }
   };
+  export const finisheProgramDay = async (req, res) => {
+    try {
+      const userId = req.body.userId;
+      const dayName = req.body.dayName;
+
+      // Find the user by userId
+      const user = await User.findById(userId);
+
+      // Check if the meditation is already finished
+      const isAlreadyFinished = user.finishedProgramDays.includes(dayName);
+
+      if (isAlreadyFinished) {
+          return res.json({ message: 'Day already finished by the user' });
+      }
+
+      // If not finished, update the user document
+      const updatedUser = await User.findByIdAndUpdate(
+          userId,
+          { $push: { finishedProgramDays: dayName } },
+          { new: true }
+      );
+
+      res.json(updatedUser);
+    } catch (error) {
+      console.error('Error finishing meditation:', error);
+      res.status(500).json({ error: 'Error finishing meditation' });
+    }
+  };
+
+  
