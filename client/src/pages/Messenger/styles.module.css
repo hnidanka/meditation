@@ -1,11 +1,17 @@
+.bodyBlock{
+  background: linear-gradient(90deg, #6100C2, #CA95FF); 
+  height: 100vh;
+}
 .messenger {
     height: calc(100vh - 70px);
     display: flex;
-    background-color: aquamarine;
+    justify-content: center;
+    margin-left: 200px;
+
   }
   
   .chatMenu {
-    flex: 3.5;
+    flex: 5.5;
   }
   
   .chatMenuInput {
@@ -24,6 +30,9 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    margin: 0 auto;
+    width: 60%; 
+    max-width: 900px;
   }
   
   .chatBoxTop {
@@ -41,8 +50,10 @@
   
   .chatMessageInput {
     width: 80%;
-    height: 90px;
+    height: 40px;
     padding: 10px;
+    border-radius: 15px;
+    background-color: rgb(207, 205, 205);
   }
   
   .chatSubmitButton {
@@ -51,7 +62,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: teal;
+    background-color: #471E70;
     color: white;
   }
   
