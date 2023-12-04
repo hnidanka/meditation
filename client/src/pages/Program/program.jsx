@@ -74,7 +74,7 @@ const openModal = (meditationId, dayName) => {
         const programResult = program.result;
   
         const userProgram = userResult.find((uProgram) => {
-          const userProgramResult = uProgram.result[0].result.result;
+          const userProgramResult = uProgram.result[0].result;
           console.log(userProgramResult)
           return programResult.every((value, index) => value === userProgramResult[index]);
         });
@@ -101,6 +101,7 @@ function onChecked(selectedDay){
 }
 function handleStart(dayMeditation){
   const dayName = selectedDay.dayName
+  console.log(dayName)
  dispatch(finisheProgramDay({userId, dayName}));
   navigate(`/meditation/${dayMeditation}`)
   

@@ -55,8 +55,6 @@ const reward1Id = state.reward.rewards[1]?._id;
 console.log(`REWARD 1 ID: ${reward1Id}`)
 useEffect(() => {
   const finishedMeditations = user?.finishedMeditations;
-
-
   const level = user?.level;
   const finishedDifferentMeditations = user?.finishedDifferentMeditations;
   const goodMoodCount = getRecentGoodMoodCount();
@@ -65,7 +63,6 @@ useEffect(() => {
   if (finishedMeditations === 1) {
     const rewardIdToAdd = state.reward.rewards[1]?._id;
     setSelectedRewardIdForMeditation(rewardIdToAdd);
-
   }
   if (level === 11 && state.reward.rewards.length > 0) {
     const rewardIdToAdd = state.reward.rewards[2]?._id;
@@ -79,9 +76,6 @@ useEffect(() => {
     const rewardIdToAdd = state.reward.rewards[0]?._id;
     setSelectedRewardIdForGoodMood(rewardIdToAdd);
   }
-
-}, [user, state.reward.rewards]);
-
   if (isFinishedProgramDaysComplete) {
     const rewardIdToAdd = state.reward.rewards[3]?._id;
     setSelectedRewardIdForProgramDays(rewardIdToAdd);
@@ -119,7 +113,6 @@ useEffect(() => {
     });
   }
 }, [dispatch, userId, selectedRewardIdForGoodMood]);
-
 
 useEffect(() => {
   if (selectedRewardIdForProgramDays) {
