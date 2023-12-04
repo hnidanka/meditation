@@ -4,8 +4,8 @@ import Homepage from './pages/Homepage/homepage';
 import Hello from './pages/Hello/hello';
 import Registration from './pages/Registration/registration';
 import Logging from './pages/Logging/logging';
-import {store} from './redux/store';
-import {Provider} from 'react-redux';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
 import StartTest from './pages/StartTest/starttest';
 import EndTest from './pages/EndTest/endtest';
 import Question1 from './pages/Question1/question1'
@@ -18,30 +18,41 @@ import MoodCalendar from './pages/Mood/mood'
 import Music from './pages/Music/music'
 import Chat from './pages/Chat/chat'
 import Profil from './pages/Profil/profil'
-import { useDispatch ,useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 //import { getMe } from './redux/features/auth/authSlice';
 import MusicUnfastened from './pages/MusicUnfastened/musicunfastened'
 import Animation from './pages/Animation/animation'
-import Meditation  from './pages/Meditation/meditation';
+import Meditation from './pages/Meditation/meditation';
 import Program from './pages/Program/program'
 import Questions from './pages/Questions/questions';
 import Test from './pages/Test/Test';
 import { MeditationsList } from './pages/MeditationsList/MeditationsList';
 import { getMe } from './redux/features/auth/authSlice';
 import Messenger from './pages/Messenger/messenger';
-function App() {
-  
+import { socket } from './socketIo';
+function App()
+{
+  const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch()
-  useEffect(()=>{
+  useEffect(() =>
+  {
+    if(!token || token === ""){
+      return;
+    }
+    socket.emit("authenticate", token);
+  }, [token])
+
+  useEffect(() =>
+  {
     dispatch(getMe())
   }, [dispatch])
- 
+
   return (
     <Router>
       <Navbar />
-      
-      <Routes>   
+
+      <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/hello" element={<Hello />} />
         <Route path="/registration" element={<Registration />} />
@@ -54,21 +65,21 @@ function App() {
         <Route path="/main/:userId" element={<Main />} />
         {/* <Route path="/main" element={<Main />} /> */}
 
-        <Route path='/books' element={<Books />}/>
-        <Route path='/mood' element={<MoodCalendar />}/>
-        <Route path='/music' element={<Music />}/> 
-        <Route path='/chat' element={<Chat />}/> 
-        <Route path='/messenger' element={<Messenger />}/> 
+        <Route path='/books' element={<Books />} />
+        <Route path='/mood' element={<MoodCalendar />} />
+        <Route path='/music' element={<Music />} />
+        <Route path='/chat' element={<Chat />} />
+        <Route path='/messenger/:chatId' element={<Messenger />} />
 
-        <Route path='/profil' element={<Profil />}/> 
-        <Route path='/musicunfastened' element={<MusicUnfastened />}/> 
-        <Route  path='/animation' element={ <Animation />}/>
-        <Route path='/questions' element={<Test />}/> 
-        <Route path='/meditationsList'element={<MeditationsList/>}/>   
-        <Route path='/questions' element={<Questions />}/> 
-        <Route path='/test' element={<Test />}/> 
-        <Route path='/meditation/:meditationId'element={<Meditation/>}/>  
-        <Route path='/program' element={<Program />}/>
+        <Route path='/profil' element={<Profil />} />
+        <Route path='/musicunfastened' element={<MusicUnfastened />} />
+        <Route path='/animation' element={<Animation />} />
+        <Route path='/questions' element={<Test />} />
+        <Route path='/meditationsList' element={<MeditationsList />} />
+        <Route path='/questions' element={<Questions />} />
+        <Route path='/test' element={<Test />} />
+        <Route path='/meditation/:meditationId' element={<Meditation />} />
+        <Route path='/program' element={<Program />} />
 
       </Routes>
     </Router>

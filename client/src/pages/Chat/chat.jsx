@@ -2,26 +2,44 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import Search from './images/Search.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage, setMessages, fetchUsers } from '../../redux/features/chatSlice';
+import { addMessage, setMessages, fetchUsers, fetchChats, addChat } from '../../redux/features/chatSlice';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { socket } from '../../socketIo';
 
-function Chat() {
+function Chat()
+{
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.chat.messages);
   const users = useSelector((state) => state.chat.users);
+  const chats = useSelector((state) => state.chat.chats);
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [selectedUsers, setSelectedUsers] = useState(() => {
-  const storedUsers = localStorage.getItem('selectedUsers');
-  return storedUsers ? JSON.parse(storedUsers) : [];
-});
+  const [activeChatUser, setActiveChatUser] = useState(null);
+  const user = useSelector((state) => state.auth.user)
+  const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
 
-useEffect(() => {
-  // Save selectedUsers to local storage whenever it changes
-  localStorage.setItem('selectedUsers', JSON.stringify(selectedUsers));
-}, [selectedUsers]);
+  useEffect(() => {
+    const handleNewChat = (chat) => {
+      dispatch(addChat(chat));
+    };
+  
+    socket.on("new-chat", handleNewChat);
+  
+    return () => {
+      socket.off("new-chat", handleNewChat);
+    };
+  });
 
-  const handleSearch = (input) => {
+  useEffect(() =>
+  {
+    console.log(chats)
+  }, [chats]);
+
+  const handleSearch = (input) =>
+  {
     setSearchInput(input);
     const filteredUsers = users.filter((user) =>
       user.username.toLowerCase().includes(input.toLowerCase())
@@ -29,17 +47,37 @@ useEffect(() => {
     setSearchResults(filteredUsers);
   };
 
-  const startChatWithUser = (user) => {
-    setSelectedUsers([...selectedUsers, user]); // Add user to selected users
-    // You may want to dispatch an action to fetch messages between logged-in user and selected user here
+  const startChatWithUser = async (targetUser) =>
+  {
+    setSearchInput("");
+    const body = {
+      "userA": user._id,
+      "userB": targetUser._id
+    }
+    try
+    {
+      const res = await axios.post("http://localhost:3002/api/chat/start-chat", body, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    } catch (error)
+    {
+      console.log(error.message);
+    }
   };
-  const removeChat = (userToRemove) => {
-    const updatedUsers = selectedUsers.filter(user => user._id !== userToRemove._id);
-    setSelectedUsers(updatedUsers);
-  }; 
+  const removeChat = (userToRemove) =>
+  {
 
-  useEffect(() => {
-    dispatch(fetchUsers()); // Dispatch the fetchUsers action on component mount
+  };
+  const navigateToChatPage = (chatId) =>
+  {
+    navigate(`/messenger/${chatId}`);
+  };
+  useEffect(() =>
+  {
+    dispatch(fetchUsers());
+    dispatch(fetchChats());
   }, [dispatch]);
 
   return (
@@ -64,22 +102,31 @@ useEffect(() => {
               <div
                 key={user._id}
                 className={styles.result}
-                onClick={() => startChatWithUser(user)} // Handle click to start chat with the user
+                onClick={() => startChatWithUser(user)}
               >
                 {user.username}
               </div>
             ))}
           </div>
         )}
+        {chats && (
+          <div className={styles.chatsContainer}>
+            {chats.map(chat => (
+              chat.users.length === 2 && (
+                <div className={styles.signleChatContainer} onClick={() => navigateToChatPage(chat._id)} key={chat.id}>
+                  {chat.users.map(usr => (
+                    usr._id !== user._id && (
+                      <div key={usr._id}>
+                        {usr.username}
+                      </div>
+                    )
+                  ))}
+                </div>
+              )
+            ))}
+          </div>
+        )}
       </div>
-      {selectedUsers.map((selectedUser) => (
-        <div key={selectedUser._id} className={styles.chatWindow} style={{ backgroundColor: 'purple' }}>
-          <p>{selectedUser.username}</p>
-          <button onClick={() => removeChat(selectedUser)}>Close Chat</button>
-          {/* Render chat messages or input field here */}
-        </div>
-      ))}
-      <div className={styles.noneSMS}>Brak powiadomień</div>
     </div>
   );
 }

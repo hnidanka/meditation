@@ -139,37 +139,6 @@ export const finishMeditation = async (req, res) => {
       res.status(500).json({ error: 'Error finishing meditation' });
     }
   };
-//add finishedMeditation
-export const finishedDifferentMeditations = async (req, res) => {
-    try {
-      const userId = req.params.userId;
-      const meditationId = req.query.meditationId;
-
-      // Find the user by userId
-      const user = await User.findById(userId);
-
-      // Check if the meditation is already finished
-      const isAlreadyFinished = user.finishedDifferentMeditations.includes(meditationId);
-
-      if (isAlreadyFinished) {
-          return res.json({ message: 'Meditation already finished by the user' });
-      }
-
-      // If not finished, update the user document
-      const updatedUser = await User.findByIdAndUpdate(
-          userId,
-          { $push: { finishedDifferentMeditations: meditationId } },
-          { new: true }
-      );
-
-      res.json(updatedUser);
-    } catch (error) {
-      console.error('Error finishing meditation:', error);
-      res.status(500).json({ error: 'Error finishing meditation' });
-    }
-  };
-
-  
   //upgrateLevel
   export const upgrateLevel = async (req, res) => {
     try {
