@@ -41,8 +41,9 @@ export const addUserRewards = async (req, res) => {
         return res.status(404).json({ message: 'Reward not found' });
       }
       const existingNewReward = await User.findOne({
-        //userId: user,
-        rewards: reward,
+
+        _id: user,
+        rewards: { $in: [reward] },
      });
      console.log(existingNewReward)
      if (existingNewReward) {
@@ -57,7 +58,7 @@ export const addUserRewards = async (req, res) => {
       res.json({ msg: "Reward Saved to User!" });
     } catch (error) {
       res.json({ error });
-      console.log("ERROR w addUser")
+      console.log("ERROR w addUserReward")
     }
   };
 

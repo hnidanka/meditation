@@ -111,7 +111,7 @@ export const rewardSlice = createSlice({
         },
         [addUserRewards.fulfilled]: (state, action) => {
             state.loading = false
-            state.userRewars.push(action.payload)
+            state.userRewars?.push(action.payload)
         },
         [addUserRewards.rejected]: (state) => {
             state.loading = false

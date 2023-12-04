@@ -44,9 +44,37 @@ function MoodCalendar() {
     if (userId) {
       dispatch(getMoodData(userId));
     }
+
+
+   //dispatch(getRewards());
+
   }, [dispatch, userId]);
  
  
+
+
+
+  // useEffect(() => {
+  //   if (moodData.length > 0 && state.reward.rewards.length > 0) {
+  //     const goodMoodData = moodData.filter(entry => entry.mood === 'good');
+  
+  //     if (goodMoodData.length >= 5) {
+  //       const rewardIdToAdd = state.reward.rewards[0]?._id;
+  //       setSelectedRewardId(rewardIdToAdd);
+  //       console.log(selectedRewardId);
+  //     }
+  //   }
+  // }, [moodData, state.reward.rewards, userId]);
+  // useEffect(() => {
+  //   console.log(selectedRewardId);
+  
+  //   if (selectedRewardId) {
+  //     dispatch(getMoodData(userId));
+  //     dispatch(addUserRewards({ userId, selectedRewardId })).then(() => {
+  //       dispatch(getMoodData(userId));
+  //     });
+  //   }
+  // }, [dispatch , selectedRewardId ]);
 
  const prepareChartData = () => {
     const moodEntries = Object.values(moodData);
@@ -102,7 +130,7 @@ function MoodCalendar() {
     return null;
   };
   
-  
+  console.log(state)
   
   return (
     <div className={styles.bodyBlock}>
