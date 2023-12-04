@@ -48,34 +48,34 @@ function MoodCalendar() {
     if (userId) {
       dispatch(getMoodData(userId));
     }
-    dispatch(getRewards());
+   //dispatch(getRewards());
   }, [dispatch, userId]);
   
   useEffect(() => {
     setLocalMoodData(Object.values(moodData)); // Update local state when moodData changes
   }, [moodData]);
 
-  useEffect(() => {
-    if (moodData.length > 0 && state.reward.rewards.length > 0) {
-      const goodMoodData = moodData.filter(entry => entry.mood === 'good');
+  // useEffect(() => {
+  //   if (moodData.length > 0 && state.reward.rewards.length > 0) {
+  //     const goodMoodData = moodData.filter(entry => entry.mood === 'good');
   
-      if (goodMoodData.length >= 5) {
-        const rewardIdToAdd = state.reward.rewards[4]?._id;
-        setSelectedRewardId(rewardIdToAdd);
-        console.log(selectedRewardId);
-      }
-    }
-  }, [moodData, state.reward.rewards, userId]);
-  useEffect(() => {
-    console.log(selectedRewardId);
+  //     if (goodMoodData.length >= 5) {
+  //       const rewardIdToAdd = state.reward.rewards[0]?._id;
+  //       setSelectedRewardId(rewardIdToAdd);
+  //       console.log(selectedRewardId);
+  //     }
+  //   }
+  // }, [moodData, state.reward.rewards, userId]);
+  // useEffect(() => {
+  //   console.log(selectedRewardId);
   
-    if (selectedRewardId) {
-      dispatch(getMoodData(userId));
-      dispatch(addUserRewards({ userId, selectedRewardId })).then(() => {
-        dispatch(getMoodData(userId));
-      });
-    }
-  }, [dispatch , selectedRewardId ]);
+  //   if (selectedRewardId) {
+  //     dispatch(getMoodData(userId));
+  //     dispatch(addUserRewards({ userId, selectedRewardId })).then(() => {
+  //       dispatch(getMoodData(userId));
+  //     });
+  //   }
+  // }, [dispatch , selectedRewardId ]);
  const prepareChartData = () => {
     const moodEntries = Object.values(localMoodData);
     const labels = moodEntries.map(entry => new Date(entry.date).toLocaleDateString());
@@ -120,7 +120,7 @@ function MoodCalendar() {
     return null;
   };
   
-  
+  console.log(state)
   
   return (
     <div className={styles.bodyBlock}>
