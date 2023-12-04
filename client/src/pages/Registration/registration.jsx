@@ -11,11 +11,17 @@ function Registration() {
   const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
+
+
+    const { status } = useSelector((state) => state.auth)
+
     const [passwordError, setPasswordError] = useState('');
+
 
     const dispatch = useDispatch()
 
     const handleSubmit = () => {
+
       try {
         if (password.length < 5) {
           setPasswordError('Пароль повинен містити щонайменше 5 символів');
@@ -27,7 +33,9 @@ function Registration() {
           setUsername('');
         }
       } catch (error) {
+
         console.log(error);
+
       }
     };
     

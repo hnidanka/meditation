@@ -13,9 +13,7 @@ export const useFetchQuestion = ()=>{
 
         (async () => {
             try {
-               /// let question = await questions2;
                 const [{questions, answers}] = await getServerData('http://localhost:3002/api/test/questions', (data)=>data)
-                //console.log(question)
                 if(questions.length > 0){
                     setGetQuestions(prev => ({...prev, isLoading : false}));
                     setGetQuestions(prev => ({...prev, apiQuestions : questions}));
