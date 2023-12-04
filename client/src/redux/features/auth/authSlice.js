@@ -1,3 +1,4 @@
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../../utils/axios'
 
@@ -109,7 +110,7 @@ export const registerUser = createAsyncThunk(
     'meditations/updateFinishedDifferentMeditations',
     async ({userId, dayName}) => {
       try {
-        const { data } = await axios.put(`/auth/finisheProgramDay`, {userId, dayName});
+        const { data } = await axios.put(`/auth/finisheProgramDay, {userId, dayName}`);
         return data;
       } catch (error) {
         console.error('Error updateFinishedDifferentMeditations:', error);
@@ -118,8 +119,7 @@ export const registerUser = createAsyncThunk(
     }
   );
 
-  
-  
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -207,10 +207,9 @@ export const authSlice = createSlice({
             state.status = action.payload.message
             state.isLoading = false
         },
-        
 
 
-         //upgrateLevel
+//upgrateLevel
          [upgrateLevel.pending]: (state) => {
             state.isLoading = true
             state.status = null

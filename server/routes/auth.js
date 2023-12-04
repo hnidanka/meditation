@@ -1,4 +1,4 @@
- import { Router } from 'express'
+import { Router } from 'express'
 import { register, login, getMe , finishMeditation,upgrateLevel, addUserImage, finishedDifferentMeditations,finisheProgramDay} from '../controllers/auth.js'
 import { checkAuth } from '../utils/checkAuth.js'
 

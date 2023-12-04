@@ -2,13 +2,14 @@
 
 
 import { Router } from 'express'
-import { sendMessage, getMessages , getUsers} from '../controllers/chat.js';
+import { startChat, fetchUserChats, fetchUsers } from '../controllers/chat.js';
+import { checkAuth } from '../utils/checkAuth.js';
 
 const router = Router();
 
 // Routes for chat operations
-router.post('/send', sendMessage);
-router.get('/messages', getMessages);
-router.get('/users', getUsers);
+router.get("/users", checkAuth, fetchUsers)
+router.post('/start-chat', checkAuth, startChat);
+router.get("/", checkAuth, fetchUserChats);
 
 export default router;

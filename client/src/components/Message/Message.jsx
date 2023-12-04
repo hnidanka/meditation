@@ -1,16 +1,19 @@
 import './message.css'
 
-export default function Message({message,own}){
-    return(
+export default function Message({image, own, messageText, createdAt}){
+  const formattedDate = new Date(createdAt).toLocaleString(undefined, {
+    dateStyle: 'medium', 
+    timeStyle: 'medium', 
+  });
+  const imageToShow = !image || image ==="" ? "https://pluspng.com/img-png/png-user-icon-circled-user-icon-2240.png": image;
+  return(
         <div className={own ? "message own" : "message"}>
              <div className='messageTop'>
-             <img  className='messageImg' src='https://www.jtrholidays.com/static/img/bucket/Tours/UAE/Dubai/Theme-Park/IMG-World-of-Adventure/IMG-World-of-Adventure-03.jpg'/>
-             <p className='messageText'>
-              text
-             </p>
+             <img  className='messageImg' src={imageToShow}/>
+             <p className='messageText'>{messageText}</p>
              </div>
              <div className='messageBottom'>
-               11
+               {formattedDate}
              </div>
         </div>
     )
