@@ -236,4 +236,22 @@ export const finishedDifferentMeditations = async (req, res) => {
     }
   };
 
+  export const changeUserName = async (req, res) => {
+    try {
+        const{userId, username} = req.body;
+      //const userId = req.params.userId;
+        console.log(username);
+        
+      // Update the user's finishedMeditations field (you may want to increment it by 1)
+      const user = await User.findByIdAndUpdate(
+        userId,
+        {  username: username } , // or use $set if you want to set a specific value
+        { new: true } // return the updated document
+      );
   
+      res.json(user);
+    } catch (error) {
+      console.error('Error changeUserName:', error);
+      res.status(500).json({ error: 'Error changeUserName:' });
+    }
+  };

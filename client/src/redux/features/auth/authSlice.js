@@ -119,7 +119,21 @@ export const finisheProgramDay = createAsyncThunk(
   }
 );
 
-
+export const changeUserName = createAsyncThunk(
+    'auth/changeUserName',
+    async ({userId, username}) => {
+      try {
+        const { data } = await axios.put(`/auth/changeUserName`,  {
+            userId,
+            username,
+        });
+        return data;
+      } catch (error) {
+        console.error('Error changeUserName:', error);
+        throw error;
+      }
+    }
+  );
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -252,6 +266,21 @@ export const authSlice = createSlice({
             
         },
         [finisheProgramDay.rejectWithValue]: (state, action) => {
+            state.status = action.payload.message
+            state.isLoading = false
+        },
+        //changeUserName
+        [changeUserName.pending]: (state) => {
+            state.isLoading = true
+            state.status = null
+        },
+        [changeUserName.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.status = null
+            state.user = action.payload.user
+            
+        },
+        [changeUserName.rejectWithValue]: (state, action) => {
             state.status = action.payload.message
             state.isLoading = false
         },

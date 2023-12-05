@@ -115,3 +115,35 @@
     height: 20px;
     margin-top: 35px;
   }
+  .modal {
+    width: 290px; /* Set the desired width */
+  max-width: 80%; /* Ensure it's responsive and doesn't exceed 80% of the screen width */
+  height: 200px; /* Set the desired height */
+  position: absolute;
+  right: 30%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+
+  justify-content: center;
+  }
+  .input{
+    border-radius: 80px;
+    border: none;
+    height: 20px;
+   
+  }
+  .update{
+    border-radius: 80px;
+    border: none;
+    background-color: #56208d;
+    color: white;
+    padding: 10px;
+    margin-left: 50px;
+   
+    
+  }
+  .modalContent{
+    color: white;
+  }

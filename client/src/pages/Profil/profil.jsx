@@ -2,11 +2,12 @@ import { useState, useEffect }  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './styles.module.css';
 import edit from './images/edit.png';
-import { addUserImage } from '../../redux/features/auth/authSlice';
+import { addUserImage, getMe,changeUserName } from '../../redux/features/auth/authSlice';
 import { getRewards , getAllUserRewards, addUserRewards} from '../../redux/features/rewardSlice';
 import { getMoodData } from '../../redux/features/moodSlice';
 
 function Profil() {
+  const dispatch = useDispatch();
   const state = useSelector((state)=> state)
   const user = useSelector(state => state.auth.user)
   const userId = useSelector(state => state.auth.user?._id)
@@ -21,8 +22,12 @@ function Profil() {
  const [selectedRewardIdForDifferentMeditations, setSelectedRewardIdForDifferentMeditations] = useState('');
  const [selectedRewardIdForGoodMood, setSelectedRewardIdForGoodMood] = useState('');
  const [selectedRewardIdForProgramDays, setSelectedRewardIdForProgramDays] = useState('');
+ const [isModalOpen, setIsModalOpen] = useState(false);
+ const [newUsername, setNewUsername] = useState('');
+ 
 
-  const dispatch = useDispatch();
+
+ 
   function covertToBase64(e){
   console.log(e)
   var reader = new FileReader();
@@ -39,6 +44,25 @@ function uploadImage(){
  // dispatch(addUserImage({userId , image}))
   console.log("Funkcja img wykonana")
 }
+const handleOpenModal = () => {
+  setIsModalOpen(true);
+};
+
+const handleCloseModal = () => {
+  setIsModalOpen(false);
+  // Reset state or trigger data fetching here
+  setNewUsername('');
+  dispatch(getMe());
+};
+
+const handleUpdateUsername = () => {
+  const username = newUsername;
+    dispatch(changeUserName({ userId, username }));
+    console.log("Username updated:", username);
+    setNewUsername(username);
+    handleCloseModal();
+    dispatch(getMe());
+};
 const getRecentGoodMoodCount = () => {
   const recentMoodData = state.mood.moodData?.slice(-5) || []; // Sprawdzenie, czy moodData jest zdefiniowane
   const goodMoodCount = recentMoodData.filter((entry) => entry.mood === 'good').length;
@@ -124,7 +148,9 @@ useEffect(() => {
 
 useEffect(() => {
   dispatch(getAllUserRewards(userId));
-}, [dispatch, userId]);;
+}, [dispatch, userId, ]);
+
+
 console.log(state)
   return (
     <div className={styles.bodyBlock}>
@@ -151,9 +177,26 @@ console.log(state)
            :  <img width={200} height={200} style={{ borderRadius: '80px' }} src={imageToDisplay}/>}
          <div className={styles.name}>
           <p>{user?.username }</p>
-          <div className={styles.edit}><img  src={edit}/></div>
+          <div className={styles.edit} onClick={handleOpenModal}><img  src={edit}/></div>
           </div>
-          
+           {/* Modal */}
+      {isModalOpen && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.close} onClick={handleCloseModal}>
+              &times;
+            </span>
+            <p>Podaj nowy username:</p>
+            <input
+              type="text"
+              value={newUsername}
+              className={styles.input}
+              onChange={(e) => setNewUsername(e.target.value)}
+            /> <br></br>
+            <button className={styles.update} onClick={handleUpdateUsername}>Zmień</button>
+          </div>
+        </div>
+      )}
      </div>
 
      <div className={styles.awards}>
@@ -184,6 +227,7 @@ console.log(state)
             </div>
             </div>
      </div>
+     
      </div>
   );
 }
