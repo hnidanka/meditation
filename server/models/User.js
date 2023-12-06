@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const Joi = require("joi")
+
 
 const UserSchema = new mongoose.Schema({
     email: {type: String , required: true},
@@ -44,13 +44,6 @@ const UserSchema = new mongoose.Schema({
     }]
   });
 
-  const validate = (data) => {
-    const schema = Joi.object({
-      email: Joi.string().email().required().label("Email")
-    })
-    return schema.validate(data)
-  }
 
-  module.exports = {validate}
 
 export default mongoose.model('User', UserSchema)  
