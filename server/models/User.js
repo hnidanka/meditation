@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
+const Joi = require("joi")
 
 const UserSchema = new mongoose.Schema({
-    email: String,
+    email: {type: String , required: true},
     password: String,
     username: String,
     image: { type: String, default: '' },
@@ -42,5 +43,14 @@ const UserSchema = new mongoose.Schema({
       default: null,
     }]
   });
+
+  const validate = (data) => {
+    const schema = Joi.object({
+      email: Joi.string().email().required().label("Email")
+    })
+    return schema.validate(data)
+  }
+
+  module.exports = {validate}
 
 export default mongoose.model('User', UserSchema)  

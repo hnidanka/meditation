@@ -18,3 +18,6 @@ export default function Message({image, own, messageText, createdAt}){
         </div>
     )
 }
+
+
+
