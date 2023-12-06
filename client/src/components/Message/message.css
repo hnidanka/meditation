@@ -37,3 +37,14 @@
       background-color: rgb(245, 241, 241);
       color: black;
   }
+
+@media (max-width: 768px) {
+    .messageImg {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    .messageText {
+      max-width: 40%; 
+    }
+  }
+  

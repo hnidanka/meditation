@@ -218,11 +218,12 @@ console.log(state)
             <p>Osiągnięcie</p>
             <div className={styles.achievementInfo}>
             <div className={styles.achievementLevel}>
-               <div className={styles.level}>{user?.level}</div>
+               <div className={styles.level}>{user?.level} <br/> Poziom </div>
+               
             </div>
             <div className={styles.achievementFinish}>
               
-              <div className={styles.finish}>{user?.finishedMeditations}</div>
+              <div className={styles.finish}>{user?.finishedMeditations} <br/> Ukończone medytacje </div>
               
             </div>
             </div>

@@ -59,8 +59,9 @@ function Registration() {
           <form className={styles.form}>
             <input type="password" id="password" name="password" placeholder="Hasło"  value={password} onChange={(e) => setPassword(e.target.value)}/>
           </form>
-          {passwordError && <p className={styles.errorText}>{passwordError}</p>}
           {emptyFieldError && !password && <p className={styles.errorText}>{emptyFieldError}</p>}
+          {passwordError && <p className={styles.errorText}>{passwordError}</p>}
+          
           <form className={styles.form}>
             <input type="pseudonym" id="pseudonym" name="pseudonym" placeholder="Wymyśl pseudonim" value={username} onChange={(e) => setUsername(e.target.value)}/>
             {emptyFieldError && !username && <p className={styles.errorText}>{emptyFieldError}</p>}
@@ -68,19 +69,6 @@ function Registration() {
           
            <div className={styles.contentDown}>
             <button className={styles.nextButton} onClick={handleSubmit}>Dalej</button>
-          {/* 
-          <Link to="/logging" className={styles.nextButton} onClick={handleSubmit}>Dalej</Link>*/}
-          <div className={styles.lines}>
-                 <div className={styles.line}></div>
-                <span className={styles.or}>LUB</span>
-                <div className={styles.line}></div>
-         </div>
-          <div className={styles.logoImages}>
-            <img src={facebook} alt="Facebook" />
-            <img src={google} alt="Google" />
-            <img src={twitter} alt="Twitter" />
-          </div>
-  
           <div className={styles.terms}>
             <p>
               Posiadasz już konto?      

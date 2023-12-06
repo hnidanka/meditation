@@ -11,7 +11,6 @@
     margin-top: 20px;
     margin-left: 350px;  
   }
-  
   .block {
     display: flex;
     width: 80%;
@@ -20,19 +19,14 @@
     border-radius: 10px;
     padding: 20px;
     margin: 20px 0;
-
   }
   .block .button2:hover {
     background-color: #6D4C8F;
   }
   .block .button1:hover {
-    
     border-radius: 50px;
   }
-  
-  .block img {
-   
-  }
+ 
   
   .leftSide {
     flex: 1;
@@ -86,6 +80,24 @@
     font-size: 28px;
   }
   .likedButton {
-    background-color: red !important; /* Set your desired color for liked button */
+    background-color: red !important; 
+  }
+  @media (max-width: 768px) {
+    .blocksContainer {
+      margin-left: 18%;
+      width: 90%; 
+    }
+  
+    .block {
+      flex-direction: column; 
+    }
+  
+    .rightSide {
+      padding: 10px; 
+    }
+  
+    .rightSide p {
+      font-size: 14px; 
+    }
   }
   
