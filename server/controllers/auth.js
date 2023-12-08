@@ -216,8 +216,9 @@ export const finishedDifferentMeditations = async (req, res) => {
       const user = await User.findById(userId);
 
       // Check if the meditation is already finished
-      const isAlreadyFinished = user.finishedProgramDays.includes(dayName);
-
+      const isAlreadyFinished = user?.finishedProgramDays.some(
+        (entry) => entry.dayName === dayName
+      );
       if (isAlreadyFinished) {
           return res.json({ message: 'Day already finished by the user' });
       }
@@ -225,7 +226,13 @@ export const finishedDifferentMeditations = async (req, res) => {
       // If not finished, update the user document
       const updatedUser = await User.findByIdAndUpdate(
           userId,
-          { $push: { finishedProgramDays: dayName } },
+          {
+            $push: {
+              finishedProgramDays: {
+                dayName: dayName,
+              },
+            },
+          },
           { new: true }
       );
 

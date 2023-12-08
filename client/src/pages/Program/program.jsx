@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLockOpen, faLock } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle, faCircle } from '@fortawesome/free-solid-svg-icons';
 import close from './images/close.png';
+import { getMoodData } from '../../redux/features/moodSlice';
 function Program() {
   const dispatch = useDispatch();
   const { programs, userResult } = useSelector((state) => state.program5Day);
@@ -31,16 +32,20 @@ function Program() {
  function getLockIcon(dayName) {
   const dayIndex = programDays.findIndex((day) => day.dayName === dayName);
 
-  // Sprawdź, czy wszystkie poprzednie dni są ukończone
+  // Check if all previous days are completed
   const allPreviousDaysCompleted = programDays
     .slice(0, dayIndex)
-    .every((prevDay) => user?.finishedProgramDays.includes(prevDay.dayName));
+    .every((prevDay) =>
+      user?.finishedProgramDays.some((finishedDay) => finishedDay.dayName === prevDay.dayName)
+    );
 
-  // Jeżeli ikona jest faLock i wszystkie poprzednie dni są ukończone, zwróć 'faLockOpen'
-  return user?.finishedProgramDays.includes(dayName) || allPreviousDaysCompleted
+  // If the day is completed or all previous days are completed, return 'faLockOpen', else 'faLock'
+  return user?.finishedProgramDays.some((finishedDay) => finishedDay.dayName === dayName) ||
+    allPreviousDaysCompleted
     ? 'faLockOpen'
     : 'faLock';
 }
+
 
 const openModal = (meditationId, dayName) => {
   if (getLockIcon(dayName) === 'faLock') {
@@ -99,14 +104,24 @@ function onChecked(selectedDay){
   
     //setChecked(check)
 }
-function handleStart(dayMeditation){
-  const dayName = selectedDay.dayName
-  console.log(dayName)
- dispatch(finisheProgramDay({userId, dayName}));
-  navigate(`/meditation/${dayMeditation}`)
-  
-  
-  
+function handleStart(dayMeditation) {
+  const dayName = selectedDay.dayName;
+
+  // Check if the day is already marked as finished
+  const isAlreadyFinished = programDays.some(
+    (day) => day.dayName === dayName && user?.finishedProgramDays?.includes(dayName)
+  );
+
+  if (isAlreadyFinished) {
+    console.log('Day already finished by the user');
+    return;
+  }
+  //const recordedMood = moodData[selectedDay.date]?.mood;
+  // Dispatch the action to finish the day
+  dispatch(finisheProgramDay({ userId, dayName }));
+
+  // Navigate to the meditation page
+  navigate(`/meditation/${dayMeditation}`);
 }
 
 

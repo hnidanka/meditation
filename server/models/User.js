@@ -37,10 +37,18 @@ const UserSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Meditation'
     }],
-    finishedProgramDays: [{
-      type: String,
-      default: null,
-    }]
+    finishedProgramDays: [
+      {
+        dayName: {
+          type: String,
+          required: true,
+        },
+        timestamp: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   });
 
 export default mongoose.model('User', UserSchema)  

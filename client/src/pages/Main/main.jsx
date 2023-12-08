@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import close from './images/close.png';
 import { to } from 'react-spring';
+import { getMoodData } from '../../redux/features/moodSlice';
 
 function Main() {
   
@@ -24,6 +25,7 @@ const isAuth = useSelector(checkIsAuth)
 const token = useSelector(state => state.auth.token)
 const user = useSelector(state => state.auth.user)
  const { userId } = useParams();
+ const { moodData } = useSelector((state) => state.mood);
 //console.log(token)
  // console.log(isAuth)
  const [savedMeditationIds, setSavedMeditationIds] = useState(
@@ -75,10 +77,27 @@ const user = useSelector(state => state.auth.user)
     // Dodaj ponowne załadowanie medytacji po usunięciu do zależności useEffect
     if (userId) {
       dispatch(getSavedMeditations(userId));
+      dispatch(getMoodData(userId));
     }
   }, [dispatch, savedMeditations]);
   // <MeditationItem i= {i} meditation={meditation}>
   //               </MeditationItem>
+  const getMoodForDay = (dayTimestamp) => {
+    const moodForDay = moodData.find(
+      (mood) => new Date(mood.date).toDateString() === new Date(dayTimestamp).toDateString()
+    );
+    return moodForDay ? moodForDay.mood : null;
+  };
+
+  const getProgramEffectMessage = (dayTimestamp) => {
+    const moodForDay = getMoodForDay(dayTimestamp);
+    if (moodForDay === 'good') {
+      return 'Program pomaga';
+    } else if (moodForDay === 'bad') {
+      return 'Program nie pomaga';
+    }
+    return null;
+  };
   return (
     <div className={styles.bodyBlock}>
       <div className={styles.oval}></div>
@@ -135,10 +154,24 @@ const user = useSelector(state => state.auth.user)
 ))}
     
   </div>
-
+  <div className={styles.accessible2}>
+                         <p>Twoj nastroj i dni</p>
+                        <div className={styles.all2}>
+                        </div>
+                    </div>
+  <div className={styles.blockContainer}>
+  {user?.finishedProgramDays?.map((day, i) => (
+        <div className={` ${styles.blockCommon}`} key={i}>
+          {/* ... (Your existing JSX code for displaying meditation items) */}
+          <p>Mood for Day {day?.dayName}: {getMoodForDay(day?.timestamp)} </p>
+          <p>{getProgramEffectMessage(day?.timestamp)}</p>
+        </div>
+      ))}
+</div>
 </div>
 
       </div>
+     
       </div>
      
     
