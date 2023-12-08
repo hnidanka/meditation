@@ -23,13 +23,13 @@
     text-align: center;
     position: relative;
     z-index: 1;
-    justify-content: center; /* Вирівнювання по горизонталі (центр) */
-    align-items: center; /* Вирівнювання по вертикалі (центр) */
+    justify-content: center; 
+    align-items: center; 
 }
 .centeredСontent img {
-    width: 40px; /* Змініть це значення на бажаний розмір */
-    height: 40px; /* Змініть це значення на бажаний розмір */
-    margin-right: 20px; /* Відступ між картинкою і текстом */
+    width: 40px; 
+    height: 40px; 
+    margin-right: 20px; 
 }
 
 
@@ -48,7 +48,7 @@
 
 .content p{
     font-family: 'Inter', sans-serif;
-    color: #fff; /* Змініть колір на білий */
+    color: #fff; 
     font-size: 35px;
     margin-top: 15px;
     text-align: center;
@@ -59,20 +59,20 @@
     position: relative;
 }
 .block {
-    text-align: center; /* Вирівнювання тексту по центру */
-    margin: 20px ; /* Маржа між блоками зверху і знизу */
-    position: relative; /* Додати позицію для позиціонування */
+    text-align: center; 
+    margin: 20px ; 
+    position: relative; 
 }
 
 .block img {
-    max-width: 100%; /* Зробіть, щоб картинка пристосовувалася до розміру блоку */
+    max-width: 100%; 
 }
 
 .block p {
     font-family: 'Inter', sans-serif;
     color: #fff;
     font-size: 18px;
-    margin-top: 20px; /* Змініть це значення на ваш смак */
+    margin-top: 20px; 
 }
 .centeredButtonContainer {
     display: flex;
@@ -100,3 +100,15 @@
     background-color: #471E70;
     border-radius: 10px;
 }
+@media screen and (max-width: 768px) {
+    .container {
+      width: 90%;
+    }
+  
+    .nextButton {
+      font-size: 3vw;
+      height: 6vw;
+      width: 18vw;
+      margin-top: 6vw;
+    }
+  }

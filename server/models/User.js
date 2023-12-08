@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
 
+
 const UserSchema = new mongoose.Schema({
-    email: String,
+    email: {type: String , required: true},
     password: String,
     username: String,
     image: { type: String, default: '' },
@@ -50,5 +51,7 @@ const UserSchema = new mongoose.Schema({
       },
     ],
   });
+
+
 
 export default mongoose.model('User', UserSchema)  

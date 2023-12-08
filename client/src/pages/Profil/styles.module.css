@@ -4,7 +4,7 @@
   background: linear-gradient(90deg, #6100C2, #CA95FF); 
   justify-content: center;
   align-items: center;
-  height: auto;
+  height: 100vh;
  
 }
 .profil{
@@ -40,9 +40,9 @@
 .noneAwards {
     color: white;
     display: flex;
-    align-items: center; /* Вирівнюйте текст по вертикалі по центру */
-    justify-content: center; /* Вирівнюйте текст по горизонталі по центру */
-    height: 100%; /* Забезпечте повну висоту для центрування */
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
   }
 .blockAwards{
     position: relative;
@@ -74,14 +74,16 @@
     text-align: center;
     margin-right: 55px; 
     margin-bottom: 25px;
+    
 }
 .level , .finish{
     display: flex;
-    align-items: center; /* Вирівнюйте текст по вертикалі по центру */
-    justify-content: center; /* Вирівнюйте текст по горизонталі по центру */
+    align-items: center; 
+    justify-content: center; 
     height: 100%;
     color: white;
 }
+
 .buttonImage{
     background: #56208d;
     border: none;
@@ -99,26 +101,24 @@
 
   
   .inputImg {
-    display: none; /* Hide the default input element */
+    display: none; 
   }
   
   .customFileInput {
-    /* Add styling for the custom file input button */
-    background-color: #6225A0; /* Example background color */
-    color: #fff; /* Example text color */
+    background-color: #6225A0; 
+    color: #fff; 
     padding: 10px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    /* Add more styles as needed */
     width: 90px;
     height: 20px;
     margin-top: 35px;
   }
   .modal {
-    width: 290px; /* Set the desired width */
-  max-width: 80%; /* Ensure it's responsive and doesn't exceed 80% of the screen width */
-  height: 200px; /* Set the desired height */
+    width: 290px; 
+  max-width: 80%;
+  height: 200px; 
   position: absolute;
   right: 30%;
   top: 20%;
@@ -146,4 +146,33 @@
   }
   .modalContent{
     color: white;
+  }
+  @media (max-width: 768px) {
+    .name {
+      text-align: center;
+    }
+  
+    .edit {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  
+    .noneAwards,
+    .blockAwards,
+    .achievementInfo {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .profil{
+      font-size: 2rem;
+      margin-left: 280px;
+  }
+  .infoUser{
+    margin-top: 20px;
+    margin-left: 120px;
+  }
+  .achievementInfo{
+    margin-left: 60px;
+}
+  
   }

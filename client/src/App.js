@@ -18,10 +18,12 @@ import MoodCalendar from './pages/Mood/mood'
 import Music from './pages/Music/music'
 import Chat from './pages/Chat/chat'
 import Profil from './pages/Profil/profil'
+import MusicUnfastened from './pages/Music/MusicUnfastened/musicunfastened'
+import MusicForLearning from './pages/Music/MusicForLearning/musicforlearning'
+import Sounds from './pages/Music/Sounds/sounds'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 //import { getMe } from './redux/features/auth/authSlice';
-import MusicUnfastened from './pages/MusicUnfastened/musicunfastened'
 import Animation from './pages/Animation/animation'
 import Meditation from './pages/Meditation/meditation';
 import Program from './pages/Program/program'
@@ -73,6 +75,8 @@ function App()
 
         <Route path='/profil' element={<Profil />} />
         <Route path='/musicunfastened' element={<MusicUnfastened />} />
+        <Route path='/musicforlearning' element={<MusicForLearning />} />
+        <Route path='/sounds' element={<Sounds />} />
         <Route path='/animation' element={<Animation />} />
         <Route path='/questions' element={<Test />} />
         <Route path='/meditationsList' element={<MeditationsList />} />

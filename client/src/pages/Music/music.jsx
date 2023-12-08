@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 import Search from './images/Search.png';
 import music1 from './images/music1.png';
@@ -160,10 +161,10 @@ function Music() {
         </div>
       </div>
       <div className={styles.selectMusic}>
-        <p className={styles.medetetion}>Do medytacji</p>
-        <p className={styles.pText}>Odprężające</p>
-        <p className={styles.pText}>Do nauki</p>
-        <p className={styles.pText}>Dźwięki</p>
+        <p className={styles.medetetion}><Link to="/music">Do medytacji</Link></p>
+        <p className={styles.pText}><Link to="/musicunfastened">Odprężające</Link></p>
+        <p className={styles.pText}><Link to="/musicforlearning">Do nauki</Link></p>
+        <p className={styles.pText}><Link to="/sounds">Dźwięki</Link></p>
         <div className={styles.songsContainer}>
         <div className={styles.songList}>
         

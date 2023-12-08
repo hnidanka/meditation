@@ -7,6 +7,8 @@ import twitter from './images/twitter.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkIsAuth, loginUser,checkIsResult } from '../../redux/features/auth/authSlice'
 import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Logging() {
   const [email, setEmail] = useState('')
@@ -15,11 +17,13 @@ const state = useSelector((state)=> state)
     const { status } = useSelector((state) => state.auth)
     const isAuth = useSelector(checkIsAuth)
     const isResult = useSelector(checkIsResult)
+    const [error, setError] = useState('');
     const user = useSelector((state) => state.auth.user)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
+      
         //if (status) toast(status)
         
        if (isAuth) {
@@ -60,31 +64,12 @@ const state = useSelector((state)=> state)
               <input type="password" id="password" name="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)}
                    />
             </form>
-    
-            <div className={styles.termsAndConditions}>
-            <p>
-              Kontynuując zgadzasz się na nasze{' '}
-              <span className={`${styles.whiteText} ${styles.grayText}`}>
-                Zasady i warunki
-              </span>
-            </p>
-            </div>
+            {error && <div style={{ color: 'red' }}>{error}</div>}
             <div className={styles.contentDown}>
-            <div className={styles.nextButton}  onClick={handleSubmit}>Dalej</div>
+              <button className={styles.nextButton}  onClick={handleSubmit}>Dalej</button>
+            {/*<div className={styles.nextButton}  onClick={handleSubmit}>Dalej</div>*/}
     
-            <div className={styles.lines}>
-                   <div className={styles.line}></div>
-                  <span className={styles.or}>LUB</span>
-                  <div className={styles.line}></div>
-           </div>
-   
-  
-    
-            <div className={styles.logoImages}>
-              <img src={facebook} alt="Facebook" />
-              <img src={google} alt="Google" />
-              <img src={twitter} alt="Twitter" />
-            </div>
+            
     
             <div className={styles.terms}>
               <p>

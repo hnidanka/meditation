@@ -1,5 +1,4 @@
 .bodyBlock{
- 
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -8,23 +7,18 @@
     justify-content: center;
     align-items: center;
     overflow: auto;
-  
 }
-
-
 .logoContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .logoImage {
     max-width: 700px; 
     opacity: 0; 
     filter: blur(10px); 
     animation: fadeIn 2s ease-in-out forwards, blurIn 2s ease-in-out forwards;
 }
-
 .companyName{
     font-size: 64px; 
     font-family: 'Inter', sans-serif; 
@@ -35,8 +29,6 @@
     animation: fadeIn 2s ease-in-out 3s forwards;
     letter-spacing: 5px;
 }
-
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -45,13 +37,19 @@
     opacity: 1;
   }
 }
-
-
 @keyframes blurIn {
   from {
     filter: blur(10px);
   }
   to {
     filter: blur(0);
+  }
+}
+@media (max-width: 768px) {
+  .logoImage {
+      max-width: 80%; 
+  }
+  .companyName {
+      font-size: 40px; 
   }
 }

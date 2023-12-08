@@ -1,40 +1,38 @@
-
 .leftRectangle {
     width: 183px;
     height: 100%;
     background-color: #471E70;
     position: fixed;
     left: 0;
-    top: 0; /* Додайте цей відступ для встановлення .leftRectangle зверху */
+    top: 0; 
 }
 
 .textOverRectangle {
     position: fixed;
-    top: 20px; /* Відступ від верху */
-    left: 20px; /* Відступ зліва */
-    color: #fff; /* Колір тексту */
-    font-size: 18px; /* Розмір шрифту */
-    /* Додайте інші стилі за потреби */
+    top: 20px; 
+    left: 20px; 
+    color: #fff; 
+    font-size: 18px; 
 }
 .logoutText {
     
     position: fixed;
-    bottom: 20px; /* Відступ знизу */
-    left: 10px; /* Відступ зліва */
-    color: #fff; /* Колір тексту */
-    font-size: 18px; /* Розмір шрифту */
+    bottom: 20px; 
+    left: 10px;
+    color: #fff; 
+    font-size: 18px; 
     display: flex;
     align-items: center;
 }
 .logoutText img {
-    margin-right: 0px; /* Відступ між зображенням і текстом */
+    margin-right: 0px; 
 }
 .sideText {
     position: absolute;
-    top: 2px; /* Відступ від верху */
-    left: 203px; /* Відступ від правого краю прямокутника */
-    color: #fff; /* Колір тексту */
-    font-size: 18px; /* Розмір шрифту */
+    top: 2px; 
+    left: 203px; 
+    color: #fff; 
+    font-size: 18px; 
 }
 .sideText p{
     font-family: 'Inter', sans-serif;
@@ -47,14 +45,14 @@
 .textOver , .logoutText{
     display: flex;
     align-items: center;
-    width: auto; /* Автоматична ширина за змістом */  
+    width: auto;  
 }
 .textOver img , .mainTextOver img {
     margin-right: 10px;
 }
 .textOver:hover , .logoutText:hover{
-    background-color: #62259F; /* Колір фону при наведенні */
-    color: #fff; /* Колір тексту при наведенні */
+    background-color: #62259F; 
+    color: #fff; 
     border-radius: 20px;
     padding-right: 20px;
     
@@ -70,5 +68,19 @@ a{
    font-size: 18px;
 }
 
-
+@media (max-width: 768px) {
+    .leftRectangle{
+        width: 70px;
+    }
+    .textOver p {
+        display: none; 
+      }
+    .buttonLog p{
+        display: none; 
+    }
+    .logo{
+        width: 70%;
+        margin-left: -20px;
+    }
+  }
 

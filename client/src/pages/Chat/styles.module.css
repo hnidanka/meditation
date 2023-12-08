@@ -26,15 +26,15 @@
     padding: 10px;
     border-radius: 40px;
     background: white;
-    width: 800px; /* Розмір контейнера, змініть на потрібний */
+    width: 800px; 
     height: 30px;
     justify-content: center;
   }
   
   .searchIcon {
-    width: 40px; /* Ширина іконки */
+    width: 40px; 
     height: auto;
-    margin: 0 10px; /* Відступи навколо іконки, змініть на потрібні */
+    margin: 0 10px;
   }
   
   .searchInput {
@@ -44,7 +44,7 @@
     outline: none;
     background: transparent;
     font-size: 16px;
-    color: #000; /* Колір тексту, змініть на потрібний */
+    color: #000; 
   }
   .noneSMS{
     justify-content: center;
@@ -84,7 +84,7 @@
 }
 .searchResults{
  
-  width: 700px; /* Розмір контейнера, змініть на потрібний */
+  width: 700px; 
   border-top: none;
   border-radius: 0 0 5px 5px;
 }
@@ -130,4 +130,25 @@
 .signleChatContainer > div {
   margin-bottom: 5px;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .searchContainer {
+    width: 70%; 
+    margin: 0 10px; 
+    margin-left: 55px;
+  }
+  .searchResults {
+    width: 60%; 
+  }
+  .chatsContainer {
+    margin-top: 15px;
+    width: 60%; 
+    margin-right: 0; 
+  }
+  .chat p{
+    font-size: 2rem;
+  }
+  
+  
 }

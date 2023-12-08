@@ -116,8 +116,8 @@
     border-radius: 20px; 
     overflow: hidden; 
     text-align: center;
-    margin-right: 55px; /* Додавання відстані між блоками */
-    margin-bottom: 25px; /* Додавання відстані між блоками */
+    margin-right: 55px; 
+    margin-bottom: 25px; 
 }
 
 
@@ -138,8 +138,69 @@
     text-align: center;
 }
 .button2{
-    background: none; /* Remove the background */
-    border: none; /* Remove the border */
+    background: none; 
+    border: none; 
     cursor: pointer;
     margin-left: 170px;
 }
+
+@media (max-width: 768px) {
+    .sideText {
+      left: 80px;  
+    }
+    .program {
+      width: 60%; 
+      flex-direction: column; 
+      align-items: center; 
+    }
+  
+    .programnext {
+      width: 80%; 
+      margin-top: 10px; 
+      font-size: 15px;
+    }
+    .mainImg {
+      top: -120px; 
+      left: 170px; 
+      width: 70%; 
+    }
+  
+    .blocksContainer {
+      flex-direction: column; 
+      align-items: center; 
+      margin-top: 20px; 
+    }
+  
+    .all {
+      position: static;
+      margin-top: 10px; 
+      text-align: center; 
+    }
+  
+    .blocksContainer, .blockContainer {
+      justify-content: center;
+    }
+  
+    .blockCommon {
+      margin-right: 0; 
+      margin-bottom: 20px; 
+    }
+  
+    .blockCommon img {
+      border-radius: 0; 
+      width: 60%;
+    }
+    .bodyBlock{
+        height: 500vh;
+    }
+    .all{
+       margin-left: 40px;
+    }
+    .all p{
+        font-size: 20px;
+    }
+    .accessible p{
+        font-size: 20px;
+    }
+  }
+  

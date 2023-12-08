@@ -25,11 +25,10 @@
   margin-top: 75px;
   
 }
-/* Adjust the styles of the custom modal */
 .customModal {
-  width: 290px; /* Set the desired width */
-  max-width: 80%; /* Ensure it's responsive and doesn't exceed 80% of the screen width */
-  height: 200px; /* Set the desired height */
+  width: 290px; 
+  max-width: 80%; 
+  height: 200px; 
   position: absolute;
   top: 50%;
   left: 50%;
@@ -37,24 +36,29 @@
   
 }
 .customModalContent{
-  background: #e6ccff; /* Set the desired background color or image */
-  padding: 20px; /* Add padding for spacing inside the content */
-  border-radius: 8px; /* Add rounded corners if needed */
+  background: #e6ccff; 
+  padding: 20px; 
+  border-radius: 8px; 
   box-shadow: 0 2px 4px  #000000;
   
 }
 .imageButton{
-  background: none; /* Remove the background */
-  border: none; /* Remove the border */
-  padding: 0; /* Remove any padding */
+  background: none;
+  border: none; 
+  padding: 0; 
   cursor: pointer;
   position: absolute;
-  top: 0px; /* Adjust the top value to your desired position */
+  top: 0px; 
   right: 5px
 }
 
 .customModalContent img {
   cursor: pointer;
-  margin: 15px; /* Adjust the margin as needed for spacing */
+  margin: 15px; 
   
+}
+@media (max-width: 768px) {
+  .bodyBlock{
+    margin-left: -90px;
+  }
 }

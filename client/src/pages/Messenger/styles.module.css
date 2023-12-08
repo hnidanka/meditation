@@ -102,4 +102,7 @@
     .chatOnline{
       flex: 1px;
     }
+    .messenger{
+      margin-left: -50px;
+    }
   }

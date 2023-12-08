@@ -46,7 +46,8 @@ function Navbar({ name }) {
       <div className={styles.oval}></div>
       <div className={styles.leftRectangle}></div>
 {isAuth && (<div className={styles.textOverRectangle}>
-        <img src={logo2} alt="Logo" />
+        <img src={logo2} alt="Logo" className={styles.logo} />
+        
         <div className={styles.textOver}>
           <img src={home} alt="Home Icon" />
           <Link to={`main/${user?._id}`}><p>Główna</p></Link>
@@ -79,7 +80,7 @@ function Navbar({ name }) {
       
       <div className={styles.logoutText}>
         <img src={logoutImg} alt="Logout Icon" />
-        <button onClick={logoutHandler} className={styles.buttonLog}>Wyloguj się</button>
+        <button onClick={logoutHandler} className={styles.buttonLog}><p>Wyloguj się</p></button>
           {/* <p>Wyloguj się</p> */}
       </div>
      </div>

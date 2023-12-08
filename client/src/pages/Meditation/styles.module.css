@@ -1,4 +1,4 @@
-/* styles.module.css */
+
 .bodyBlock{
   margin: 0;
   padding: 0;
@@ -19,8 +19,7 @@
   }
 }
 
-/* styles.module.css */
-/* styles.module.css */
+
 
 @keyframes appear {
   0% {
@@ -33,10 +32,10 @@
 
 @keyframes float {
   0% {
-    transform: translateX(-100%); /* Start from the left edge */
+    transform: translateX(-100%); 
   }
   100% {
-    transform: translateX(100%); /* Move to the right edge */
+    transform: translateX(100%);
   }
 }
 
@@ -56,32 +55,30 @@
 .cloud {
   width: 150px;
   position: absolute;
-  animation: appear 3s ease-in-out, float 15s linear infinite; /* Adjust the duration for the full width */
+  animation: appear 3s ease-in-out, float 15s linear infinite; 
   animation-fill-mode: forwards;
   transform-origin: left;
 }
 
-/* Create a reverse animation for clouds */
 .cloud.reverse {
-  animation: appear 3s ease-in-out reverse, float 15s linear infinite; /* Reverse animation without a return to the beginning */
+  animation: appear 3s ease-in-out reverse, float 15s linear infinite; 
   animation-fill-mode: forwards;
-  transform-origin: right; /* Start animation from the right edge */
+  transform-origin: right; 
 }
 
-/* Apply the same animation to cloud1 */
 .cloud1 {
   width: 150px;
   position: absolute;
-  animation: appear 3s ease-in-out, float 15s linear infinite; /* Adjust the duration for the full width */
+  animation: appear 3s ease-in-out, float 15s linear infinite; 
   animation-fill-mode: forwards;
   transform-origin: left;
 }
 
-/* Create a reverse animation for cloud1 */
+
 .cloud1.reverse {
-  animation: appear 3s ease-in-out reverse, float 15s linear infinite; /* Reverse animation without a return to the beginning */
+  animation: appear 3s ease-in-out reverse, float 15s linear infinite; 
   animation-fill-mode: forwards;
-  transform-origin: right; /* Start animation from the right edge */
+  transform-origin: right; 
 }
 
 .textOverlay {
@@ -90,7 +87,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 10; /* Make sure the text is on top of the animation */
+  z-index: 10; 
 }
 
 .textOverlay h1 {
@@ -127,7 +124,6 @@
   padding: 0;
   margin: 0;
   cursor: pointer;
-  /* Додайте інші стилі, які вам потрібні */
 }
 .disabledAnimation {
   animation: none;
@@ -158,13 +154,6 @@
   pointer-events: none;
 }
 
-
-/* styles.module.css */
-
-
-
-
-
 .audioControls {
   position: absolute;
   bottom: 10%;
@@ -183,7 +172,7 @@
 }
 
 .controlIcon {
-  width: 30px; /* Adjust the size as needed */
+  width: 30px; 
   height: 30px;
 }
 
@@ -197,12 +186,11 @@
 
 .progressBar {
   height: 100%;
-  background-color: #4caf50; /* Adjust the color as needed */
+  background-color: #4caf50; 
 }
 
-/* Add any other styles as needed */
 .debugButton {
-  border: 2px solid red; /* Add a border to make it visible */
+  border: 2px solid red; 
 }
 .customButton2{
   background: none;
@@ -214,4 +202,18 @@
   border-radius: 10px;
   cursor: pointer;
   padding: 10px;
+}
+@media (max-width: 768px) {
+  .textOverlay {
+    top: 20%; 
+  }
+
+  .audioControls {
+    bottom: 5%;
+  }
+
+  .customButton2 {
+    font-size: 16px; 
+    margin-left: 20px;
+  }
 }
