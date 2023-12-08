@@ -1,0 +1,294 @@
+.bodyBlock{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(90deg, #6100C2, #CA95FF); 
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+   
+  }
+    
+    .oval {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 89%;
+      height: 165px;
+      background-color: #471E70;
+      border-radius: 50% 50% 0 0;
+      overflow: hidden;
+      margin-left: 169px;
+      z-index: -1;
+    }
+    
+    .pageHeader {
+      text-align: center;
+      font-size: 3rem;
+      color: white;
+      
+     
+    }
+  
+    .searchApp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+     
+    }
+    
+    .searchContainer {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: 40px;
+      background: white;
+      width: 800px; 
+      height: 30px;
+    }
+    
+    .searchIcon {
+      width: 40px; 
+      height: auto;
+      margin: 0 10px; 
+    }
+    
+    .searchInput {
+      flex: 1;
+      padding: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 16px;
+      color: #000; 
+    }
+    
+    .selectMusic p {
+      display: inline;
+      margin: 50px;
+      font-size: 22px;
+      color: white;
+    }
+    
+    .medetetion {
+      border-bottom: 4px solid #471E70;
+    }
+    .selectMusic{
+      margin-left: 330px;
+    }
+    .songsContainer {
+      margin-top: 30px;
+      margin-left: 50px;
+    }
+   
+    .song {
+     
+      justify-content: space-between;
+      width: 500px;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 10px;
+    }
+    
+    .song h3 {
+      font-size: 10px;
+      margin: 7px 0;
+    }
+    
+    .song p {
+      font-size: 16px;
+      margin: 0;
+    }
+    
+    .songInfo{
+      display: flex;
+      align-items: center;
+      margin-left: 40px;
+    }
+  
+    .audioInfo {
+      width: 80px;
+    }
+  
+    .songList ul {
+      list-style: none;
+      padding: 0;
+    }
+    .songList li {
+      display: flex;
+      align-items: center;
+      background-color: #945fca;
+      margin-top: 10px;
+      border-radius: 15px;
+      width: 860px;
+      height: 70px;
+    }
+    
+    .songList button {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: #ffffff;
+      font-weight: 50px;
+      margin-left: 10px;
+    }
+  
+    .playerContainer {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .audioPlayerContainer {
+      display: flex;
+      align-items: center;
+    }
+    
+    .customAudioControls {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    
+    .playButton,
+    .stopButton,
+    .skipBackwardButton,
+    .skipForwardButton {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+    
+    .playButton img,
+    .stopButton img,
+    .skipBackwardButton img,
+    .skipForwardButton img {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .volumeSlider {
+      width: 100px;
+      margin: 0 10px;
+    }
+    
+    .songInfo .songTitle {
+      font-size: 21px; 
+      margin: 0;
+   
+    }
+  
+    .songInfo .songAuthor {
+      font-size: 15px; 
+      margin: 0;
+    
+    }
+    .songInfo {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+   
+    }
+    .slider {
+      width: 60%;
+      margin-top: 30px;
+      margin-left: 340px;
+    }
+    
+    .progressSlider {
+      width: 100%;
+      height: 15px; 
+      background: #7c287f; 
+      position: relative;
+    }
+    
+    .progressSlider input {
+      width: 100%;
+      height: 5px;
+      background: #471E70; 
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .songListItem:hover {
+      background-color: #471E70;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .pText:hover {
+      color: #471E70; 
+    }
+  
+  .songListContainer {
+    overflow-y: auto; 
+    max-height: 300px; 
+  }
+  ::-webkit-scrollbar {
+    width: 12px; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #582d84; 
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #471E70; 
+  }
+  @media (max-width: 768px) {
+  
+    .searchContainer {
+      width: 60vw;
+    }
+    .songsContainer {
+      margin-left: 0;
+      max-width: 50vw;
+    }
+    .slider {
+      width: 60vw;
+      margin-left: 0;
+    }
+    .audioInfo{
+      width: 60px;
+    }
+    .selectMusic{
+      margin-left: 90px;
+    }
+    .oval{
+      display: none;
+    }
+    .songInfo .songTitle{
+      font-size: 15px;
+    }
+    .songInfo .songAuthor{
+      font-size: 10px;
+    }
+    .songListContainer{
+      width: 400px;
+    }
+    .songList li{
+      width: 370px;
+    }
+    .selectMusic p{
+      font-size: 10px;
+      margin-left: 0px;
+    }
+    .slider{
+      margin-left: 100px;
+    }
+   
+  }
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
