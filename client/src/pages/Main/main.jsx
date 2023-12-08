@@ -3,18 +3,21 @@ import styles from './styles.module.css';
 import forward from './images/forward.png'
 import main_img from './images/main_img.png'
 import woman_main from './images/woman_main.png'
+import addMood from './images/appointment.png'
 import add from './images/add.png'
+import start from './images/rocket.png'
+import positiveMood from './images/mind.png'
 import { useState, useEffect }  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkIsAuth, getMe } from '../../redux/features/auth/authSlice';
 import { getMeditations, getSavedMeditations, removeSavedMeditation} from '../../redux/features/meditationSlice';
 import { MeditationItem } from './MeditationItem';
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import close from './images/close.png';
 import { to } from 'react-spring';
 import { getMoodData } from '../../redux/features/moodSlice';
-
+import { useMemo } from 'react';
 function Main() {
   
    const dispatch = useDispatch();
@@ -38,14 +41,14 @@ const user = useSelector(state => state.auth.user)
        
     }, [dispatch])
 
-    // useEffect(() => {
-    //   if (userId) {
-    //     dispatch(getSavedMeditations(userId));
-    //   }
-    // }, [dispatch, userId]);
-    // console.log(savedMeditations);
+  //   useEffect(() => {
+  //     if (userId) {
+  //       dispatch(getSavedMeditations(userId));
+  //     }
+  //   }, [dispatch, userId]);
+  //   console.log(savedMeditations);
 
-   //console.log(state);
+  //  console.log(state);
 
    
    function onChecked(selectedBlock){
@@ -72,6 +75,16 @@ const user = useSelector(state => state.auth.user)
     }
     console.log('Current state:', state);
   };
+
+  const handleChangeProgram = async () => {
+ 
+    try {
+      
+    } catch (error) {
+      
+    }
+   
+  };
   
   useEffect(() => {
     // Dodaj ponowne załadowanie medytacji po usunięciu do zależności useEffect
@@ -79,9 +92,8 @@ const user = useSelector(state => state.auth.user)
       dispatch(getSavedMeditations(userId));
       dispatch(getMoodData(userId));
     }
-  }, [dispatch, savedMeditations]);
-  // <MeditationItem i= {i} meditation={meditation}>
-  //               </MeditationItem>
+  }, [dispatch, userId]);
+
   const getMoodForDay = (dayTimestamp) => {
     const moodForDay = moodData.find(
       (mood) => new Date(mood.date).toDateString() === new Date(dayTimestamp).toDateString()
@@ -97,6 +109,91 @@ const user = useSelector(state => state.auth.user)
       return 'Program nie pomaga';
     }
     return null;
+  };
+  const getProgramSuccessMessage = () => {
+    const programDays = user?.finishedProgramDays || [];
+    let successCount = 0;
+  
+    for (const day of programDays) {
+      const moodForDay = getMoodForDay(day.timestamp);
+      
+      if (moodForDay === 'good') {
+        successCount++;
+        console.log(successCount)
+      } 
+      else if (moodForDay === 'bad') {
+        successCount--;
+      }
+    }
+  
+    if (successCount > 0) {
+      return 'Program zakończył się sukcesem! 🎉';
+     
+    }else if (successCount <= 0 ){
+      return (<div className={styles.programSuccessMessage}>
+        <p>Niestety nasz program  nie pomogł, propunujemy ci ponownie wykonać test w celu pobierania innego programu</p>
+        <button onClick={handleChangeProgram} className={styles.customButton}> Zmień program</button>
+        </div>);
+    }
+  
+    return null;
+  };
+  const getLast7DaysMoods = useMemo(() => {
+    const last7Days = [];
+    const currentDate = new Date();
+  
+    for (let i = 0; i < 7; i++) {
+      const dayTimestamp = currentDate.getTime() - i * 24 * 60 * 60 * 1000;
+      const moodForDay = getMoodForDay(dayTimestamp); // Dodano || 'neutral'
+      last7Days.push(moodForDay);
+      console.log(dayTimestamp);
+    }
+  
+    return last7Days;
+  }, [moodData]);
+console.log(getLast7DaysMoods)
+  const isMoreBadThanGood = getLast7DaysMoods.filter(mood => mood === 'bad').length >
+                             getLast7DaysMoods.filter(mood => mood === 'good').length;
+
+ const isMoreGoodThanBad = getLast7DaysMoods.filter(mood => mood === 'bad').length <
+                             getLast7DaysMoods.filter(mood => mood === 'good').length;
+console.log(isMoreBadThanGood )
+console.log(isMoreGoodThanBad )
+  const renderMessage = () => {
+    if (isMoreBadThanGood) {
+      // Lista nazw medytacji
+const meditationNames = ["Medytacja Vipassana", "Medytacja Metta (Maitri)", "Medytacja Kundalini", "Medytacja Zen"];
+
+// Filtruj medytacje na podstawie nazw
+const filteredMeditations = meditations.filter(meditation => meditationNames.includes(meditation.title));
+
+// Renderuj tylko medytacje zgodne z nazwami
+
+      return ( 
+        <div className={styles.suggestedBlock}>
+        
+      <p >Twój nastrój był więcej razy "bad" niż "good" przez ostatnie 7 dni. Propunujęmy ci wykonać dodatkową medytacje w celu ulepszenia twojego nastroju:</p>
+              <div className={styles.blocksContainer}>
+  {filteredMeditations?.slice(0, 4).map((meditation, i) => (
+    <div className={` ${styles.blockCommon}`} key={i}>
+      <MeditationItem i={i} meditation={meditation}></MeditationItem>
+    </div>
+  ))}
+</div>
+              </div>
+      );
+    }else if (isMoreGoodThanBad) {
+      return (<div className={styles.suggestedBlock}>
+        <p>Jesteś w pozytywnym nastroju przez ostatnie 7 dni </p>
+        <img src={positiveMood}  alt="positive"  /> 
+                </div>);
+    }  else { 
+      return (<div className={styles.noCompleteddDaysResponse}>
+        <p> Nie zapisałeś żadnego nastroju. Zapisz nastrój i zobacz nasze porady </p>
+        <img src={addMood} onClick={() => window.location.assign('/mood')} alt="addMood" className={styles.mainImg} />
+      </div>
+      );
+    }
   };
   return (
     <div className={styles.bodyBlock}>
@@ -140,41 +237,74 @@ const user = useSelector(state => state.auth.user)
                         <div className={styles.all2}>
                         </div>
                     </div>
-
-                    <div className={styles.blockContainer}>
-                    {savedMeditations?.map((savedMeditation, i) => (
-  <div key={i} className={` ${styles.blockCommon}`}>
-    {savedMeditation && (
-      <button className={styles.button2} onClick={() => {handleRemove(savedMeditation?._id, savedMeditation?.meditationId)}}><img src={close} className={styles.close}/></button>
-    )}
-  <img src={`http://localhost:3002/images/${savedMeditation?.img}`} alt={`Image for option `} />
-
-    {savedMeditation?.title || 'Untitled Meditation'}
+                    {user?.savedMeditations && user?.savedMeditations.length > 0 ? (
+  <div className={styles.blockContainer}>
+    {savedMeditations?.map((savedMeditation, i) => (
+      <div key={i} className={` ${styles.blockCommon}`}>
+        {savedMeditation && (
+          <button className={styles.button2} onClick={() => {handleRemove(savedMeditation?._id, savedMeditation?.meditationId)}}>
+            <img src={close} className={styles.close} />
+          </button>
+        )}
+        <img src={`http://localhost:3002/images/${savedMeditation?.img}`} alt={`Image for option `} />
+        {savedMeditation?.title || 'Untitled Meditation'}
+      </div>
+    ))}
   </div>
-))}
-    
-  </div>
+) : (
+  <div className={styles.noCompleteddDaysResponse}>
+        <p> Nie zapisałeś żadnej medytacji </p>
+        <img src={add} onClick={() => window.location.assign('/meditationsList')} alt="addMeditation" className={styles.mainImg} />
+      </div>
+)}
+                    
   <div className={styles.accessible2}>
-                         <p>Twoj nastroj i dni</p>
+                         <p>Obserwacja twojego nastroju na podstawie programu medytacyjnego</p>
                         <div className={styles.all2}>
                         </div>
                     </div>
-  <div className={styles.blockContainer}>
-  {user?.finishedProgramDays?.map((day, i) => (
-        <div className={` ${styles.blockCommon}`} key={i}>
-          {/* ... (Your existing JSX code for displaying meditation items) */}
-          <p>Mood for Day {day?.dayName}: {getMoodForDay(day?.timestamp)} </p>
-          <p>{getProgramEffectMessage(day?.timestamp)}</p>
-        </div>
-      ))}
-</div>
+                    {user?.finishedProgramDays && user?.finishedProgramDays.length > 0 ? (
+  <>
+    <table>
+      <thead>
+        <tr>
+          <th>Dzień</th>
+          <th>Nastrój</th>
+          <th>Wynik</th>
+        </tr>
+      </thead>
+      <tbody>
+        {user.finishedProgramDays.map((day, i) => (
+          <tr key={i}>
+            <td>{day?.dayName}</td>
+            <td>{getMoodForDay(day?.timestamp)}</td>
+            <td>{getProgramEffectMessage(day?.timestamp)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>  {user?.finishedProgramDays && user?.finishedProgramDays.length > 5 ? (getProgramSuccessMessage()
+    ):( 
+      `W celu uzyskanie ogólnego wyniku musisz skończyć program`)}
+    
+  </>
+) : (
+  <div className={styles.noCompleteddDaysResponse}>
+  <p>Nie wykonałeś jeszcze żadnego dnia. Przystąp do programu medytacyjnego w celu uzyskania analizy.</p>
+  <img src={start} onClick={() => window.location.assign('/program')} alt="start program"  className={styles.mainImg} />
+  </div>
+)}
+
+
+<div className={styles.accessible2}>
+<p>Nasze polecenia </p>                         
+  </div>
+{renderMessage()}
 </div>
 
+
+
+      </div>   
       </div>
-     
-      </div>
-     
-    
   );
 }
 

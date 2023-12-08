@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     background: linear-gradient(90deg, #6100C2, #CA95FF);
-    height: 210vh ;
+    height: 410vh ;
     justify-content: center;
     align-items: center;
    
@@ -143,6 +143,63 @@
     cursor: pointer;
     margin-left: 170px;
 }
+.accessible23 {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; 
+  color: #62259F;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #62259F;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #62259F;
+  color: #fff;
+}
+.programSuccessMessage{
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+}
+.programSuccessMessage p{
+  font-size: 17px;
+}
+.customButton{
+  width: 10%;
+  padding: 10px;
+ border: none;
+ border-radius: 80px;
+ color: #fff;
+  background-color: #350961;
+}
+.noCompleteddDaysResponse{
+display: flex;
+flex-direction: column;
+  align-items:first baseline;
+  background-color: #601ca4;
+  
+}
+.noCompleteddDaysResponse p{
+  font-size: 17px;
+  margin-left: 10%;
+}
+.noCompleteddDaysResponse img {
+  margin-top: 5%;
+  height: 12%;
+  width: 12%;
+  background-color: #350961;
+  padding: 2%;
+}
 
 @media (max-width: 768px) {
     .sideText {
@@ -203,4 +260,11 @@
         font-size: 20px;
     }
   }
+  .suggestedBlock p{
+    
+    font-size: 17px;
+  }
   
+  /* .suggestedBlockContent{
+    font-size: 10px;
+  } */
