@@ -282,7 +282,7 @@ const filteredMeditations = meditations.filter(meditation => meditationNames.inc
           </tr>
         ))}
       </tbody>
-    </table>  {user?.finishedProgramDays && user?.finishedProgramDays.length > 5 ? (getProgramSuccessMessage()
+    </table>  {user?.finishedProgramDays && user?.finishedProgramDays.length >= 5 ? (getProgramSuccessMessage()
     ):( 
       `W celu uzyskanie ogólnego wyniku musisz skończyć program`)}
     
