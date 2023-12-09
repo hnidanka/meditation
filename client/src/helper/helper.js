@@ -17,3 +17,4 @@ export async function postServerData(url,result ,callback){
     const data = await (await axios.get(url, result))?.data;
     return callback ? callback(data) : data;
 }
+
