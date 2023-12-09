@@ -204,11 +204,21 @@ flex-direction: column;
 .suggestedBlock{
   background-color: #601ca4;
   border-radius: 15px;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+.suggestedBlock2{
+  background-color: #601ca4;
+  border-radius: 15px;
   width: 30%;
   padding: 10px;
   text-align: center;
 }
+.suggestedBlock2 p{
+ font-size: 18px;
 
+}
 @media (max-width: 768px) {
     .sideText {
       left: 80px;  
