@@ -18,8 +18,8 @@ export const checkAuth = (req, res, next) => {
         }
     } else {
         console.log("no token provided");
-        return res.json({
-            message: 'Nie na dostępu.',
-        })
+        // return res.json({
+        //     message: 'Nie na dostępu.',
+        // })
     }
 }

@@ -12,7 +12,8 @@ import {useLocation} from 'react-router-dom'
 import { Link , useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector } from 'react-redux';
 import { checkIsAuth, logout } from '../../redux/features/auth/authSlice';
-
+import {ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 function Navbar({ name }) {
     const isAuth = true
 
@@ -21,6 +22,7 @@ function Navbar({ name }) {
    const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user)
     const navigate = useNavigate()
+    const { status } = useSelector((state) => state.auth)
     // useEffect(() => {
     //     if (status) toast(status)
     //     if (isAuth) navigate(`/main/${user._id}`)
@@ -30,8 +32,11 @@ function Navbar({ name }) {
     const logoutHandler = () => {
       dispatch(logout())
       window.localStorage.removeItem('token')
-      console.log('Wylogowałeś się z systemu')
+      
+        toast('Wylogowałeś się z systemu')
+      
       navigate('/logging')
+      
   }
     const location = useLocation();
     const { pathname } = location;
@@ -83,6 +88,7 @@ function Navbar({ name }) {
         <button onClick={logoutHandler} className={styles.buttonLog}><p>Wyloguj się</p></button>
           {/* <p>Wyloguj się</p> */}
       </div>
+      <ToastContainer position='bottom-right' />
      </div>
   );
 }

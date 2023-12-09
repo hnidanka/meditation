@@ -33,6 +33,8 @@ import { MeditationsList } from './pages/MeditationsList/MeditationsList';
 import { getMe } from './redux/features/auth/authSlice';
 import Messenger from './pages/Messenger/messenger';
 import { socket } from './socketIo';
+import {ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 function App()
 {
   const token = useSelector(state => state.auth.token);
@@ -53,7 +55,7 @@ function App()
   return (
     <Router>
       <Navbar />
-
+      <ToastContainer position='bottom-right' />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/hello" element={<Hello />} />

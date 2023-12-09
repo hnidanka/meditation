@@ -6,8 +6,8 @@ import google from './images/google.png';
 import twitter from './images/twitter.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkIsAuth, loginUser,checkIsResult } from '../../redux/features/auth/authSlice'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 function Logging() {
@@ -24,8 +24,8 @@ const state = useSelector((state)=> state)
     const navigate = useNavigate()
     useEffect(() => {
       
-        //if (status) toast(status)
-        
+        if (status) toast(status)
+        // if (!status)toast('Wylogowałeś się z systemu')
        if (isAuth) {
         if (isResult && user.result.length > 0) {
           
@@ -79,6 +79,7 @@ const state = useSelector((state)=> state)
             </div>
             </div>
           </div>
+          {/* <ToastContainer position='bottom-right' /> */}
         </div>
       );
     }

@@ -5,16 +5,17 @@ import facebook from './images/facebook.png';
 import google from './images/google.png';
 import twitter from './images/twitter.png';
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser, checkIsAuth } from '../../redux/features/auth/authSlice'
-
+import { registerUser, checkIsAuth, clearStatus } from '../../redux/features/auth/authSlice'
+import {ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 function Registration() {
   const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
     const [emptyFieldError, setEmptyFieldError] = useState('');
-
+const state = useSelector((state)=>state.auth)
     const { status } = useSelector((state) => state.auth)
-
+    const isAuth = useSelector(checkIsAuth)
     const [passwordError, setPasswordError] = useState('');
 
 
@@ -38,13 +39,23 @@ function Registration() {
           setPassword('');
           setUsername('');
   
-          navigate('/logging');
+          
         }
       } catch (error) {
         console.log(error);
       }
     };
-    
+    useEffect(() => {
+      if (status) {
+          toast(status)
+      }
+      if (isAuth) navigate('/logging');
+      return () => {
+        // Clear status when component unmounts
+        dispatch(clearStatus());
+      };
+  }, [status, isAuth, navigate, dispatch])
+  console.log(state)
     return (
       <div className={styles.bodyBlock}>
         <div className={styles.oval}></div>
@@ -77,6 +88,7 @@ function Registration() {
             </p></div>
           </div>
         </div>
+        {/* <ToastContainer position='bottom-right' /> */}
       </div>
     );
   }

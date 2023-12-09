@@ -134,7 +134,9 @@ export const changeUserName = createAsyncThunk(
       }
     }
   );
-
+  export const clearStatus = () => (dispatch) => {
+    dispatch(authSlice.actions.setStatus(null));
+  };
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -144,6 +146,9 @@ export const authSlice = createSlice({
             state.token = null
             state.isLoading = false
             state.status = null
+        },
+        setStatus: (state, action) => {
+          state.status = action.payload;
         },
     },
     extraReducers: {
@@ -184,7 +189,7 @@ export const authSlice = createSlice({
          },
          [getMe.fulfilled]: (state, action) => {
              state.isLoading = false
-             state.status = null
+             state.status = action.payload.message
              state.user = action.payload?.user
              state.token = action.payload?.token
          },

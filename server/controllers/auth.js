@@ -115,10 +115,10 @@ export const getMe =async (req, res) =>{
         })
 
     } catch (error) {
-        res.json({
-            message: 'Nie ma dostępu',
-        }
-        )
+        // res.json({
+        //    // message: 'Nie ma dostępu',
+        // }
+       // )
     }
 }
 //add finishedMeditation
