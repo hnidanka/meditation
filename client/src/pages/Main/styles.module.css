@@ -200,6 +200,13 @@ flex-direction: column;
   width: 12%;
   padding: 2%;
 }
+.suggestedBlock{
+  background-color: #601ca4;
+  border-radius: 15px;
+  width: 30%;
+  padding: 10px;
+  text-align: center;
+}
 
 @media (max-width: 768px) {
     .sideText {
@@ -262,7 +269,7 @@ flex-direction: column;
   }
   .suggestedBlock p{
     
-    font-size: 17px;
+    font-size: 18px;
   }
   
   /* .suggestedBlockContent{
