@@ -12,14 +12,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { checkIsAuth, getMe } from '../../redux/features/auth/authSlice';
 import { getMeditations, getSavedMeditations, removeSavedMeditation} from '../../redux/features/meditationSlice';
 import { MeditationItem } from './MeditationItem';
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import close from './images/close.png';
 import { to } from 'react-spring';
 import { getMoodData } from '../../redux/features/moodSlice';
 import { useMemo } from 'react';
+import { removeResult } from '../../redux/features/auth/authSlice';
 function Main() {
-  
+  const navigate = useNavigate()
    const dispatch = useDispatch();
    const {meditations, savedMeditations} = useSelector((state) => state.meditation)
   const state = useSelector(state => state)
@@ -77,13 +78,15 @@ const user = useSelector(state => state.auth.user)
   };
 
   const handleChangeProgram = async () => {
- 
+    const resultId = user?.result[0];
+    console.log(`RESULT ID ${resultId}`);
     try {
-      
+      console.log(`USERID ${userId}`);
+      dispatch(removeResult({ userId, resultId }));
+      navigate(`/starttest`);
     } catch (error) {
-      
+      // Handle error
     }
-   
   };
   
   useEffect(() => {
@@ -127,7 +130,10 @@ const user = useSelector(state => state.auth.user)
     }
   
     if (successCount > 0) {
-      return 'Program zakończył się sukcesem! 🎉';
+      return (<div className={styles.programSuccessMessage}><p>Program zakończył się sukcesem! 🎉</p>
+      <p>Zmieniłeś swoję medytacyjne preferencje? Możesz uzyskać nowy program </p>
+        <button onClick={handleChangeProgram} className={styles.customButton}> Nowy program</button></div>
+      );
      
     }else if (successCount <= 0 ){
       return (<div className={styles.programSuccessMessage}>
@@ -172,7 +178,7 @@ const filteredMeditations = meditations.filter(meditation => meditationNames.inc
       return ( 
         <div className={styles.suggestedBlock}>
         
-      <p >Twój nastrój był więcej razy "bad" niż "good" przez ostatnie 7 dni. Propunujęmy ci wykonać dodatkową medytacje w celu ulepszenia twojego nastroju:</p>
+      <p >Twój nastrój był więcej razy zły niż dobry przez ostatnie 7 dni. Propunujęmy ci wykonać dodatkową medytacje w celu ulepszenia twojego nastroju:</p>
               <div className={styles.blocksContainer}>
   {filteredMeditations?.slice(0, 4).map((meditation, i) => (
     <div className={` ${styles.blockCommon}`} key={i}>

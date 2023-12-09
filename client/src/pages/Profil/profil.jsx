@@ -2,10 +2,11 @@ import { useState, useEffect }  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './styles.module.css';
 import edit from './images/edit.png';
-import { addUserImage, getMe,changeUserName } from '../../redux/features/auth/authSlice';
+import { addUserImage, getMe,changeUserName , removeUserImage} from '../../redux/features/auth/authSlice';
 import { getRewards , getAllUserRewards, addUserRewards} from '../../redux/features/rewardSlice';
 import { getMoodData } from '../../redux/features/moodSlice';
-
+import { getMeditations } from '../../redux/features/meditationSlice';
+import close from './images/close.png';
 function Profil() {
   const dispatch = useDispatch();
   const state = useSelector((state)=> state)
@@ -41,8 +42,12 @@ function Profil() {
   }
 }
 function uploadImage(){
- // dispatch(addUserImage({userId , image}))
+  dispatch(addUserImage({userId , image}))
   console.log("Funkcja img wykonana")
+  
+}
+function removeImage(){
+  dispatch(removeUserImage({userId}))
 }
 const handleOpenModal = () => {
   setIsModalOpen(true);
@@ -72,7 +77,8 @@ useEffect(() => {
   dispatch(getRewards());
    dispatch(getMoodData(userId));
   dispatch(getAllUserRewards(userId));
-}, [dispatch, userId]);
+  dispatch(getMe())
+}, [dispatch, userId, image]);
 
 
 const reward1Id = state.reward.rewards[1]?._id;
@@ -174,7 +180,15 @@ console.log(state)
             />
            <button onClick={uploadImage} className={styles.buttonImage}>Dodaj img</button>
             </div>
-           :  <img width={200} height={200} style={{ borderRadius: '80px' }} src={imageToDisplay}/>}
+           :  (
+            <div  className={styles.hasImg} >
+               <div className={styles.edit} onClick={removeImage}>
+              <img src={close} className={styles.close} />
+              </div>
+              <img width={200} height={200} style={{ borderRadius: '80px' }} src={imageToDisplay} />
+             
+            </div>
+          )}
          <div className={styles.name}>
           <p>{user?.username }</p>
           <div className={styles.edit} onClick={handleOpenModal}><img  src={edit}/></div>

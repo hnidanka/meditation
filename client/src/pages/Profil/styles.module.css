@@ -38,8 +38,11 @@
     margin-left: 220px;
   }
 .name{
+  
     margin-left: 40px;
     display: flex;
+    
+    
 }
 .name p , .imageUser p , .awards p , .achievement p{
     font-size: 30px;
@@ -136,7 +139,7 @@
   height: 200px; 
   position: absolute;
   right: 30%;
-  top: 20%;
+  top: 30%;
   transform: translate(-50%, -50%);
 
   display: flex;
@@ -179,6 +182,11 @@
   .blockAwardsInfo p{
     font-size: 18px;
     margin-left: 0px;
+  }
+  .hasImg img{
+    /* position: absolute; */
+    top: 10px;
+    
   }
   @media (max-width: 768px) {
     .name {

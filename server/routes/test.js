@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { insertQuestions ,getQuestions} from '../controllers/test.js'
 import { checkAuth } from '../utils/checkAuth.js'
-import { storeResult, getResult } from '../controllers/test.js'
+import { storeResult, getResult, removeResult } from '../controllers/test.js'
 const router = new Router()
 
 //Get all questions
@@ -15,4 +15,5 @@ router.post('/questions',insertQuestions)
 router.post('/results',storeResult,checkAuth )
 //get all results
 router.get('/results',getResult )
+router.delete('/removeResult', removeResult)
  export default router

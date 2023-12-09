@@ -71,3 +71,40 @@ export const getResult = async (req, res) => {
   res.json({ error })
 }
 }
+
+//Remove result
+export const removeResult = async (req, res) => {
+  try {
+    const userId = req.query.userId; // Use req.query to get userId from URL parameters
+    const resultId = req.query.resultId;// Destructure userId and resultId from req.body
+
+    // Find the user by ID
+    const user = await User.findById(userId);
+
+    console.log(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Check if the user has any results
+    if (user.result.length === 0) {
+      return res.status(404).json({ error: 'No results to remove' });
+    }
+
+    // Remove the last result from the user's results array
+    const removedResult = user.result.pop();
+
+    // Save the updated user
+    await user.save();
+
+    // Delete the corresponding Result document
+    await Result.findByIdAndDelete(resultId);
+
+    res.json({ message: 'Result removed successfully' });
+  } catch (error) {
+    console.error('Error removing result:', error);
+    res.status(500).json({ error: 'Error removing result' });
+  }
+};

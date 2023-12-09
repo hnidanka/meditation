@@ -134,9 +134,38 @@ export const changeUserName = createAsyncThunk(
       }
     }
   );
+
+  
   export const clearStatus = () => (dispatch) => {
     dispatch(authSlice.actions.setStatus(null));
   };
+
+  export const removeResult = createAsyncThunk(
+    'test/removeResult',
+    async ({ userId, resultId }) => {
+      try {
+        const { data } = await axios.delete(`/test/removeResult?userId=${userId}&resultId=${resultId}`);
+        return data;
+      } catch (error) {
+        console.error('Error removeResult:', error);
+        throw error;
+      }
+    }
+  );
+
+  export const removeUserImage = createAsyncThunk(
+    'auth/removeUserImage',
+    async ({ userId }) => {
+      try {
+        const { data } = await axios.delete(`/auth/removeUserImage?userId=${userId}`);
+        return data;
+      } catch (error) {
+        console.error('Error removeResult:', error);
+        throw error;
+      }
+    }
+  );
+  
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -289,6 +318,30 @@ export const authSlice = createSlice({
             state.status = action.payload.message
             state.isLoading = false
         },
+        [removeResult.pending]: (state) => {
+          state.loading = true
+      },
+      [removeResult.fulfilled]: (state, action) => {
+          state.loading = false
+          state.user = action.payload
+          
+      },
+      [removeResult.rejected]: (state) => {
+          state.loading = false
+      }
+      //removeUserImage
+      ,
+        [removeUserImage.pending]: (state) => {
+          state.loading = true
+      },
+      [removeUserImage.fulfilled]: (state, action) => {
+          state.loading = false
+          state.user = action.payload
+          
+      },
+      [removeUserImage.rejected]: (state) => {
+          state.loading = false
+      }
     },
 })
 
