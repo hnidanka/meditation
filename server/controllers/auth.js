@@ -262,3 +262,29 @@ export const finishedDifferentMeditations = async (req, res) => {
       res.status(500).json({ error: 'Error changeUserName:' });
     }
   };
+
+  export const removeUserImage = async (req, res) => {
+    try {
+      const userId = req.query.userId;
+      
+  
+      // Find the user by ID
+      const user = await User.findById(userId);
+  
+      // Check if the user exists
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      // Remove the image from the user's image field
+      user.image = '';
+  
+      // Save the updated user
+      await user.save();
+  
+      res.json({ message: 'Image removed successfully', user });
+    } catch (error) {
+      console.error('Error removeUserImage:', error);
+      res.status(500).json({ error: 'Error removeUserImage' });
+    }
+  };

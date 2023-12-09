@@ -152,6 +152,20 @@ export const changeUserName = createAsyncThunk(
       }
     }
   );
+
+  export const removeUserImage = createAsyncThunk(
+    'auth/removeUserImage',
+    async ({ userId }) => {
+      try {
+        const { data } = await axios.delete(`/auth/removeUserImage?userId=${userId}`);
+        return data;
+      } catch (error) {
+        console.error('Error removeResult:', error);
+        throw error;
+      }
+    }
+  );
+  
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -313,6 +327,19 @@ export const authSlice = createSlice({
           
       },
       [removeResult.rejected]: (state) => {
+          state.loading = false
+      }
+      //removeUserImage
+      ,
+        [removeUserImage.pending]: (state) => {
+          state.loading = true
+      },
+      [removeUserImage.fulfilled]: (state, action) => {
+          state.loading = false
+          state.user = action.payload
+          
+      },
+      [removeUserImage.rejected]: (state) => {
           state.loading = false
       }
     },
