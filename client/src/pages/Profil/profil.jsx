@@ -204,7 +204,7 @@ console.log(state)
           <div className={styles.blockAwards}>
               {/* <div className={styles.noneAwards}>Nie masz nagród </div> */}
               {userReward?.map((reward, i) => (
-              <div className={styles}>
+              <div className={styles.blockAwardsInfo}>
                  <p>{reward?.title}</p> 
                  <img src={`http://localhost:3002/images/${reward?.img}`} alt={`Image for option `} />
 

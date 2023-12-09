@@ -183,7 +183,7 @@ const filteredMeditations = meditations.filter(meditation => meditationNames.inc
               </div>
       );
     }else if (isMoreGoodThanBad) {
-      return (<div className={styles.suggestedBlock}>
+      return (<div className={styles.suggestedBlock2}>
         <p>Jesteś w pozytywnym nastroju przez ostatnie 7 dni </p>
         <img src={positiveMood}  alt="positive"  /> 
                 </div>);
