@@ -92,5 +92,20 @@
   top: 20px; /* Adjust the top value to your desired position */
   right: 30px
 }
+@media (max-width: 768px) {
+  .block {
+    max-width: 90%;
+    height: 80px;
+    margin-left: 60px;
+  }
 
+  .innerBlock {
+    font-size:15px;
+    height: 70%;
+  }
+  .header {
+    font-size: 20px;
+    margin-left: 50px;
+  }
+}
   

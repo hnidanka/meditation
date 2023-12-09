@@ -50,38 +50,36 @@ function Navbar({ name }) {
     <div className={styles.body}>
       <div className={styles.oval}></div>
       <div className={styles.leftRectangle}></div>
-{isAuth && (<div className={styles.textOverRectangle}>
-        <img src={logo2} alt="Logo" className={styles.logo} />
-        
-        <div className={styles.textOver}>
-          <img src={home} alt="Home Icon" />
-          <Link to={`main/${user?._id}`}><p>Główna</p></Link>
-
-          {/* <Link to={`/main`}><p>Główna</p></Link> */}
+      {isAuth && (
+        <div className={styles.textOverRectangle}>
+           <img src={logo2} alt="Logo" className={styles.logo} />
+           
+          <Link to={`main/${user?._id}`} className={styles.textOver}>
+            <img src={home} alt="Home Icon" />
+            <p>Główna</p>
+          </Link>
+          <Link to="/music" className={styles.textOver}>
+            <img src={music} alt="Music Icon" />
+            <p>Muzyka</p>
+          </Link>
+          <Link to="/chat" className={styles.textOver}>
+            <img src={chat} alt="Chat Icon" />
+            <p>Czat</p>
+          </Link>
+          <Link to="/profil" className={styles.textOver}>
+            <img src={profil} alt="Profil Icon" />
+            <p>Profil</p>
+          </Link>
+          <Link to="/mood" className={styles.textOver}>
+            <img src={calendar} alt="Calendar Icon" />
+            <p>Nastrój</p>
+          </Link>
+          <Link to="/books" className={styles.textOver}>
+            <img src={books} alt="Books Icon" />
+            <p>Książki</p>
+          </Link>
         </div>
-        <div className={styles.textOver}>
-          <img src={music} alt="Music Icon" />
-          <Link to="/music"><p>Muzyka</p></Link>
-        </div>
-        <div className={styles.textOver}>
-          <img src={chat} alt="Chat Icon" />
-          <Link to="/chat"><p>Czat</p></Link>
-        </div>
-        <div className={styles.textOver}>
-          <img src={profil} alt="Profil Icon" />
-          <Link to="/profil"><p>Profil</p></Link>
-        </div>
-        <div className={styles.textOver}>
-          <img src={calendar} alt="Calendar Icon" />
-          <Link to="/mood"><p>Nastrój</p></Link>
-        </div>
-        
-        <div className={styles.textOver}>
-          <img src={books} alt="Books Icon" />
-          <Link to="/books"><p>Książki</p></Link>
-        </div>
-      </div>
-)}
+      )}
       
       <div className={styles.logoutText}>
         <img src={logoutImg} alt="Logout Icon" />

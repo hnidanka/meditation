@@ -181,6 +181,7 @@ console.log(state)
           </div>
            {/* Modal */}
       {isModalOpen && (
+         <div className={styles.overlay}>
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <span className={styles.close} onClick={handleCloseModal}>
@@ -195,7 +196,7 @@ console.log(state)
             /> <br></br>
             <button className={styles.update} onClick={handleUpdateUsername}>Zmień</button>
           </div>
-        </div>
+        </div></div>
       )}
      </div>
 

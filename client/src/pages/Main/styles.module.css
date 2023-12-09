@@ -76,6 +76,10 @@
     color: #828181;   
 }
 
+
+
+
+
 .blocksContainer {
     display: flex;
     flex-wrap: wrap;
@@ -275,6 +279,12 @@ flex-direction: column;
     }
     .accessible p{
         font-size: 20px;
+    }
+    .suggestedBlock{
+      background-color: #601ca4;
+      border-radius: 15px;
+      width: 80%;
+      padding: 10px;
     }
   }
   .suggestedBlock p{

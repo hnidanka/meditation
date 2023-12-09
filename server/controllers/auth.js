@@ -200,7 +200,7 @@ export const finishedDifferentMeditations = async (req, res) => {
         {  image: image } , // or use $set if you want to set a specific value
         { new: true } // return the updated document
       );
-  
+
       res.json(user);
     } catch (error) {
       console.error('Error addUserImage:', error);
